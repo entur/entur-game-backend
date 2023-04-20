@@ -1,11 +1,9 @@
 spring:
   datasource:
-    platform: postgres
     driverClassName: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/norgestur-db
-    username: postgres
-    password: entur123
-
+    url: ${DATABASE_URL}
+    username: ${PGPASSWORD}
+    password: ${PGUSER}
   jpa:
     show-sql: true
   flyway:
