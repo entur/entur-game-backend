@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 class PlayerScoreController (val playerScoreService: PlayerScoreService){
     @GetMapping("/player-score")
     fun getPlayerScore(): List<PlayerScoreDto> {
-        return playerScoreService.getAll().map { it.toResponse() }
+        return playerScoreService.getTopTen().map { it.toResponse() }
     }
     @PostMapping("/player-score")
     fun addPlayerScore(
