@@ -52,10 +52,10 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
             secondsTravelTime.toString()
         }
 
-        val factor1 = 0.9
+        val factor1 = 7
         val factor2 = 0.1
-        val factor3 = 0.2
-        val bestRoute1 = 7
+        val factor3 = 0.005
+        val bestRoute1 = 3
         val bestRoute2 = 11594
         val bestRoute3 = 24960
 
