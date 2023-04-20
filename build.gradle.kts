@@ -37,3 +37,10 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
+tasks.bootJar {
+	archiveFileName.set("app.jar")
+}
+
+tasks.getByName<Jar>("jar") {
+	enabled = false
+}
