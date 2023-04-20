@@ -54,10 +54,10 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
 
         val factor1 = 0.9
         val factor2 = 0.1
-        val factor3 = 0.02
+        val factor3 = 0.2
         val bestRoute1 = 7
         val bestRoute2 = 11594
-        val bestRoute3 = 11594
+        val bestRoute3 = 24960
 
         playerScore.score = 100 + ((factor1 * (bestRoute1 - playerScore.totalOptions)) + (factor3 * (bestRoute3 - playerScore.totalTravelTime.toInt()))).toInt()
         playerScore.totalPlaytime = "$totalHoursPlayed:$totalMinutesPlayed:$totalSecondsPlayed"
