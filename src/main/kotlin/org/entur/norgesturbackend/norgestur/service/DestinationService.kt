@@ -9,4 +9,8 @@ class DestinationService(val destinationRepository: DestinationRepository) {
     fun getAll(): List<Destination>{
         return destinationRepository.findAll()
     }
+
+    fun getDestinationByDestinationId(destinationId: String): Destination{
+        return destinationRepository.findDestinationByDestinationId(destinationId)
+    }
 }
