@@ -21,7 +21,7 @@ data class PlayerScore(
 
 data class PlayerScoreDto(
         val nickname: String,
-        val score: Int,
+        val score: Int?,
         val totalOptions: Int,
         val totalPlaytime: String,
         val totalTravelTime: String,
