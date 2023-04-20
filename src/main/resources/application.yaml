@@ -4,8 +4,8 @@ spring:
   datasource:
     driverClassName: org.postgresql.Driver
     url: ${DATABASE_URL}
-    username: ${PGPASSWORD}
-    password: ${PGUSER}
+    username: ${PGUSER}
+    password: ${PGPASSWORD}
   jpa:
     show-sql: true
   flyway:
