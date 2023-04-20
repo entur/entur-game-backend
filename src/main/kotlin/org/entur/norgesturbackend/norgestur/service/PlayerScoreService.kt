@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service
 
 @Service
 class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
-    fun getAll(): List<PlayerScore>{
-        return playerScoreRepository.findAll()
+    fun getTopTen(): List<PlayerScore>{
+        return playerScoreRepository.findTopTenScores()
     }
 
     fun savePlayerScore(playerScore: PlayerScore): PlayerScore{
