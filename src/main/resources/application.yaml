@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: ${ENVIRONMENT:local}
   datasource:
     driverClassName: org.postgresql.Driver
     url: ${DATABASE_URL}
