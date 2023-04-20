@@ -1,9 +1,6 @@
 package org.entur.norgesturbackend.norgestur.model
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
+import jakarta.persistence.*
 
 @Entity
 data class PlayerScore(
@@ -15,8 +12,12 @@ data class PlayerScore(
         val totalOptions: Int,
         val totalPlaytime: Int,
         val totalTravelTime: Int,
-        val fromDestination: String,
-        val toDestination: String
+        @ManyToOne
+        @JoinColumn(name = "from_destination", referencedColumnName = "id")
+        val fromDestination: Destination,
+        @ManyToOne
+        @JoinColumn(name = "to_destination", referencedColumnName = "id")
+        val toDestination: Destination,
 )
 
 data class PlayerScoreDto(
@@ -25,8 +26,8 @@ data class PlayerScoreDto(
         val totalOptions: Int,
         val totalPlaytime: String,
         val totalTravelTime: String,
-        val fromDestination: String,
-        val toDestination: String
+        val fromDestination: Destination,
+        val toDestination: Destination
 )
 
 fun PlayerScore.toResponse(): PlayerScoreDto {
