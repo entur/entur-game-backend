@@ -9,4 +9,8 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
     fun getAll(): List<PlayerScore>{
         return playerScoreRepository.findAll()
     }
+
+    fun savePlayerScore(playerScore: PlayerScore): PlayerScore{
+        return playerScoreRepository.save(playerScore)
+    }
 }
