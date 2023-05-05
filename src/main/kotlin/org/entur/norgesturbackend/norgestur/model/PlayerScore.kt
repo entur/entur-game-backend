@@ -9,6 +9,7 @@ data class PlayerScore(
         val id: Int,
         val nickname: String,
         var score: Int,
+        var difficulty: String,
         val totalOptions: Int,
         var totalPlaytime: String,
         var totalTravelTime: String,
@@ -23,6 +24,7 @@ data class PlayerScore(
 data class PlayerScoreDto(
         val nickname: String,
         val score: Int?,
+        val difficulty: String,
         val totalOptions: Int,
         val totalPlaytime: String,
         val totalTravelTime: String,
@@ -34,6 +36,7 @@ fun PlayerScore.toResponse(): PlayerScoreDto {
         return PlayerScoreDto(
                 nickname = nickname,
                 score = score,
+                difficulty = difficulty,
                 totalOptions = totalOptions,
                 totalPlaytime = totalPlaytime,
                 totalTravelTime = totalTravelTime,

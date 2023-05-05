@@ -6,6 +6,9 @@ import org.springframework.stereotype.Service
 
 @Service
 class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
+    fun getTopTenByDifficulty(difficulty: String): List<PlayerScore>{
+        return playerScoreRepository.findTopTenScoresByDifficulty(difficulty)
+    }
     fun getTopTen(): List<PlayerScore>{
         return playerScoreRepository.findTopTenScores()
     }
@@ -19,6 +22,13 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
         val hoursTravelTime = playerScore.totalTravelTime.toInt()/3600
         val minutesTravelTime = (playerScore.totalTravelTime.toInt() % 3600)/60
         val secondsTravelTime = playerScore.totalTravelTime.toInt()%60
+        var score = 0.00
+        val optimalEasyRoute = 3
+        val optimalEasyTravelTime = 7485
+        val optimalMediumRoute = 3
+        val optimalMediumTravelTime = 7485
+        val optimalHardRoute = 3
+        val optimalHardTravelTime = 7485
 
         val totalHoursPlayed: String = if (hoursPlayTime <= 9){
             "0$hoursPlayTime"
@@ -52,11 +62,15 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
             secondsTravelTime.toString()
         }
 
-        val optimalRoute = 3
-        val optimalTravelTime = 7485
-        val score  = 100.00 * (optimalRoute.toDouble() / playerScore.totalOptions.toDouble()) * (optimalTravelTime.toDouble() / playerScore.totalTravelTime.toDouble())
-        playerScore.score = score.toInt()
+        if (playerScore.difficulty.lowercase() == "lett"){
+            score = 100.00 * (optimalEasyRoute.toDouble() / playerScore.totalOptions.toDouble()) * (optimalEasyTravelTime.toDouble() / playerScore.totalTravelTime.toDouble())
+        } else if (playerScore.difficulty.lowercase() == "medium") {
+            score = 100.00 * (optimalMediumRoute.toDouble() / playerScore.totalOptions.toDouble()) * (optimalMediumTravelTime.toDouble() / playerScore.totalTravelTime.toDouble())
+        } else if (playerScore.difficulty.lowercase() == "vanskelig"){
+            score = 100.00 * (optimalHardRoute.toDouble() / playerScore.totalOptions.toDouble()) * (optimalHardTravelTime.toDouble() / playerScore.totalTravelTime.toDouble())
+        }
 
+        playerScore.score = score.toInt()
         playerScore.totalPlaytime = "$totalHoursPlayed:$totalMinutesPlayed:$totalSecondsPlayed"
         playerScore.totalTravelTime = "$totalHoursTraveled:$totalMinutesTraveled:$totalSecondsTraveled"
         return playerScoreRepository.save(playerScore)
