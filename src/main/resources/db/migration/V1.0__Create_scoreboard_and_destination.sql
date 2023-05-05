@@ -7,6 +7,7 @@ CREATE TABLE player_score (
 	id serial PRIMARY KEY,
 	nickname VARCHAR(30) NOT NULL,
 	score INT,
+	difficulty VARCHAR(10) NOT NULL,
 	total_options INT NOT NULL,
 	total_playtime VARCHAR(30) NOT NULL,
 	total_travel_time VARCHAR(30) NOT NULL,
