@@ -23,12 +23,12 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
         val minutesTravelTime = (playerScore.totalTravelTime.toInt() % 3600)/60
         val secondsTravelTime = playerScore.totalTravelTime.toInt()%60
         var score = 0.00
-        val optimalEasyRoute = 3
-        val optimalEasyTravelTime = 7485
-        val optimalMediumRoute = 3
-        val optimalMediumTravelTime = 7485
-        val optimalHardRoute = 3
-        val optimalHardTravelTime = 7485
+        val optimalEasyRoute = 1
+        val optimalEasyTravelTime = 24600
+        val optimalMediumRoute = 6
+        val optimalMediumTravelTime = 57780
+        val optimalHardRoute = 7
+        val optimalHardTravelTime = 123000
 
         val totalHoursPlayed: String = if (hoursPlayTime <= 9){
             "0$hoursPlayTime"
