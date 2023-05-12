@@ -64,7 +64,7 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
 
         if (playerScore.difficulty.lowercase() == "lett"){
             score = 100.00 * (optimalEasyRoute.toDouble() / playerScore.totalOptions.toDouble()) * (optimalEasyTravelTime.toDouble() / playerScore.totalTravelTime.toDouble())
-        } else if (playerScore.difficulty.lowercase() == "medium") {
+        } else if (playerScore.difficulty.lowercase() == "middels") {
             score = 100.00 * (optimalMediumRoute.toDouble() / playerScore.totalOptions.toDouble()) * (optimalMediumTravelTime.toDouble() / playerScore.totalTravelTime.toDouble())
         } else if (playerScore.difficulty.lowercase() == "vanskelig"){
             score = 100.00 * (optimalHardRoute.toDouble() / playerScore.totalOptions.toDouble()) * (optimalHardTravelTime.toDouble() / playerScore.totalTravelTime.toDouble())
