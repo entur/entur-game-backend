@@ -8,6 +8,8 @@ spring:
     password: ${PGPASSWORD}
   jpa:
     show-sql: true
+#    generate-ddl: true
   flyway:
+#    enabled: false
     enabled: true
     validate-on-migrate: true
