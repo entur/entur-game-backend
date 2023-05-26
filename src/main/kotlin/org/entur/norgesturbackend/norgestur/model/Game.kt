@@ -32,7 +32,8 @@ data class GameRequest(
 data class GameResponse(
     val id: String,
     val status: String,
-    val playerList: List<PlayerResponse>
+    val playerList: List<PlayerResponse>,
+    val winnerPlayer: PlayerResponse? = null,
 )
 
 fun GameRequest.toDomain(gameStatus: String, winnerPlayer: PlayerRequest?): Game {
@@ -50,6 +51,7 @@ fun Game.toResponse(): GameResponse {
     return GameResponse(
         id = id,
         status = status,
-        playerList = playerList.map { it.toResponse() }
+        playerList = playerList.map { it.toResponse() },
+        winnerPlayer = winnerPlayer?.toResponse()
     )
 }
