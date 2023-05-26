@@ -1,7 +1,5 @@
-DELETE FROM player_score
-
 DELETE FROM destination
-WHERE destination = 'Fjellheimen/Låven'
+WHERE destination = 'Fjellheimen/Låven';
 
 UPDATE destination
 SET id = 'NSR:StopPlace:9625'
