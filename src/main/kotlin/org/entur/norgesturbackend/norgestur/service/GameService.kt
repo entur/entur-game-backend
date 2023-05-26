@@ -1,6 +1,7 @@
 package org.entur.norgesturbackend.norgestur.service
 
 import jakarta.transaction.Transactional
+import org.entur.norgesturbackend.norgestur.model.GAME_STATUS
 import org.entur.norgesturbackend.norgestur.model.Game
 import org.entur.norgesturbackend.norgestur.model.Player
 import org.entur.norgesturbackend.norgestur.repository.GameRepository
@@ -35,7 +36,13 @@ class GameService(val gameRepository: GameRepository, val playerRepository: Play
     @Transactional
     fun setGameFinished(id: String): Game{
         val game = gameRepository.findById(id).orElseThrow()
-        return gameRepository.save(game)
+        return gameRepository.save(game.copy(status = GAME_STATUS.FINISHED.name))
+    }
+
+    @Transactional
+    fun setGameStart(id: String): Game {
+        val game = gameRepository.findById(id).orElseThrow()
+        return gameRepository.save(game.copy(status = GAME_STATUS.STARTED.name))
     }
 
     fun updateGame(updateGame: Game): Game{

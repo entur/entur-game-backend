@@ -55,19 +55,19 @@ class GameController(val gameService: GameService, val simpMessagingTemplate: Si
     fun joinGame(@PathVariable id: String, @PathVariable nickname: String): GameResponse {
         val playerRequest = PlayerRequest(nickname = nickname, gameId = id)
         gameService.joinGame(playerRequest.toDomain())
-        simpMessagingTemplate.convertAndSend("/topic/$id", CommandMessageRequest(COMMAND.REFRESH).toResponse())
+        simpMessagingTemplate.convertAndSend("/topic/$id", CommandMessageRequest(COMMAND.REFRESH, null).toResponse())
         return gameService.getGame(id).toResponse()
     }
 
-    @PostMapping("/start/{id}")
-    fun startGame(@PathVariable id: String): ResponseEntity<Unit> {
+    @PostMapping("/start/{id}/game-level/{gameLevel}")
+    fun startGame(@PathVariable id: String, @PathVariable gameLevel: String): ResponseEntity<Unit> {
         try {
-            gameService.getGame(id)
+            gameService.setGameStart(id)
         } catch (e: Exception) {
             return ResponseEntity(HttpStatus.NOT_FOUND)
         }
 //         Send Command to everyone in the lobby
-        simpMessagingTemplate.convertAndSend("/topic/$id", CommandMessageRequest(COMMAND.STARTED).toResponse())
+        simpMessagingTemplate.convertAndSend("/topic/$id", CommandMessageRequest(COMMAND.STARTED, gameLevel).toResponse())
         return ResponseEntity(HttpStatus.NO_CONTENT)
     }
 
@@ -75,6 +75,6 @@ class GameController(val gameService: GameService, val simpMessagingTemplate: Si
     fun finishGame(@DestinationVariable id: String) {
         gameService.setGameFinished(id)
         // Send Command to everyone in the lobby
-        simpMessagingTemplate.convertAndSend("/topic/$id", CommandMessageRequest(COMMAND.FINISHED).toResponse())
+        simpMessagingTemplate.convertAndSend("/topic/$id", CommandMessageRequest(COMMAND.FINISHED, null).toResponse())
     }
 }
