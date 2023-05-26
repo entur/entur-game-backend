@@ -72,8 +72,8 @@ class GameController(val gameService: GameService, val simpMessagingTemplate: Si
     }
 
     @MessageMapping("/topic/{id}/finished")
-    fun finishGame(@DestinationVariable id: String) {
-        gameService.setGameFinished(id)
+    fun finishGame(@DestinationVariable id: String, nickname: String) {
+        gameService.setGameFinished(id, nickname)
         // Send Command to everyone in the lobby
         simpMessagingTemplate.convertAndSend("/topic/$id", CommandMessageRequest(COMMAND.FINISHED, null).toResponse())
     }
