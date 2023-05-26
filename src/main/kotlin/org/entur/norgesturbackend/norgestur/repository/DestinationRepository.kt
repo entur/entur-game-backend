@@ -1,6 +1,5 @@
 package org.entur.norgesturbackend.norgestur.repository
 
-import jakarta.persistence.Id
 import org.entur.norgesturbackend.norgestur.model.Destination
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
