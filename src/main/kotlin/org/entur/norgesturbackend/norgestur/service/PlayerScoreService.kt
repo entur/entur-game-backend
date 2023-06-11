@@ -29,6 +29,8 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
         val optimalMediumTravelTime = 57780
         val optimalHardRoute = 7
         val optimalHardTravelTime = 123000
+        val optimalEventRoute = 0
+        val optimalEventTravelTime = 0
 
         val totalHoursPlayed: String = if (hoursPlayTime <= 9){
             "0$hoursPlayTime"
@@ -68,6 +70,8 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
             score = 100.00 * (optimalMediumRoute.toDouble() / playerScore.totalOptions.toDouble()) * (optimalMediumTravelTime.toDouble() / playerScore.totalTravelTime.toDouble())
         } else if (playerScore.difficulty.lowercase() == "vanskelig"){
             score = 100.00 * (optimalHardRoute.toDouble() / playerScore.totalOptions.toDouble()) * (optimalHardTravelTime.toDouble() / playerScore.totalTravelTime.toDouble())
+        } else if (playerScore.difficulty.lowercase() == "event"){
+            score = 100.00 * (optimalEventRoute.toDouble() / playerScore.totalOptions.toDouble()) * (optimalEventTravelTime.toDouble() / playerScore.totalTravelTime.toDouble())
         }
 
         playerScore.score = score.toInt()
