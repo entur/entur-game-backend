@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
+
     fun getTopTenByDifficulty(difficulty: String): List<PlayerScore>{
         return playerScoreRepository.findTopTenScoresByDifficulty(difficulty)
     }
@@ -23,14 +24,7 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
         val minutesTravelTime = (playerScore.totalTravelTime.toInt() % 3600)/60
         val secondsTravelTime = playerScore.totalTravelTime.toInt()%60
         var score = 0.00
-        val optimalEasyRoute = 2
-        val optimalEasyTravelTime = 27720
-        val optimalMediumRoute = 6
-        val optimalMediumTravelTime = 57780
-        val optimalHardRoute = 7
-        val optimalHardTravelTime = 123000
-        val optimalEventRoute = 0
-        val optimalEventTravelTime = 0
+
 
         val totalHoursPlayed: String = if (hoursPlayTime <= 9){
             "0$hoursPlayTime"
@@ -65,18 +59,29 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
         }
 
         if (playerScore.difficulty.lowercase() == "lett"){
-            score = 100.00 * (optimalEasyRoute.toDouble() / playerScore.totalOptions.toDouble()) * (optimalEasyTravelTime.toDouble() / playerScore.totalTravelTime.toDouble())
+            score = 100.00 * (OPTIMAL_EASY_ROUTE.toDouble() / playerScore.totalOptions.toDouble()) * (OPTIMAL_EASY_TAVEL_TIME.toDouble() / playerScore.totalTravelTime.toDouble())
         } else if (playerScore.difficulty.lowercase() == "middels") {
-            score = 100.00 * (optimalMediumRoute.toDouble() / playerScore.totalOptions.toDouble()) * (optimalMediumTravelTime.toDouble() / playerScore.totalTravelTime.toDouble())
+            score = 100.00 * (OPTIMAL_MEDIUM_ROUTE.toDouble() / playerScore.totalOptions.toDouble()) * (OPTIMAL_MEDIUM_TAVEL_TIME.toDouble() / playerScore.totalTravelTime.toDouble())
         } else if (playerScore.difficulty.lowercase() == "vanskelig"){
-            score = 100.00 * (optimalHardRoute.toDouble() / playerScore.totalOptions.toDouble()) * (optimalHardTravelTime.toDouble() / playerScore.totalTravelTime.toDouble())
+            score = 100.00 * (OPTIMAL_HARD_ROUTE.toDouble() / playerScore.totalOptions.toDouble()) * (OPTIMAL_HARD_TAVEL_TIME.toDouble() / playerScore.totalTravelTime.toDouble())
         } else if (playerScore.difficulty.lowercase() == "event"){
-            score = 100.00 * (optimalEventRoute.toDouble() / playerScore.totalOptions.toDouble()) * (optimalEventTravelTime.toDouble() / playerScore.totalTravelTime.toDouble())
+            score = 100.00 * (OPTIMAL_EVENT_ROUTE.toDouble() / playerScore.totalOptions.toDouble()) * (OPTIMAL_EVENT_TAVEL_TIME.toDouble() / playerScore.totalTravelTime.toDouble())
         }
 
         playerScore.score = score.toInt()
         playerScore.totalPlaytime = "$totalHoursPlayed:$totalMinutesPlayed:$totalSecondsPlayed"
         playerScore.totalTravelTime = "$totalHoursTraveled:$totalMinutesTraveled:$totalSecondsTraveled"
         return playerScoreRepository.save(playerScore)
+    }
+
+    companion object {
+        const val OPTIMAL_EASY_ROUTE = 2
+        const val OPTIMAL_EASY_TAVEL_TIME = 27720
+        const val OPTIMAL_MEDIUM_ROUTE = 6
+        const val OPTIMAL_MEDIUM_TAVEL_TIME = 57780
+        const val OPTIMAL_HARD_ROUTE = 7
+        const val OPTIMAL_HARD_TAVEL_TIME = 123000
+        const val OPTIMAL_EVENT_ROUTE = 0
+        const val OPTIMAL_EVENT_TAVEL_TIME = 0
     }
 }
