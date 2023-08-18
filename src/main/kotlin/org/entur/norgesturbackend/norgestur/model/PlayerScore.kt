@@ -9,7 +9,7 @@ data class PlayerScore(
         val id: Int,
         val name: String,
         val email: String,
-        val phoneNumber: String,
+        val phoneNumber: Int,
         var score: Int,
         var difficulty: String,
         val totalOptions: Int,
@@ -26,7 +26,7 @@ data class PlayerScore(
 data class PlayerScoreDto(
         val name: String,
         val email: String,
-        val phoneNumber: String,
+        val phoneNumber: Int,
         val score: Int?,
         val difficulty: String,
         val totalOptions: Int,
