@@ -34,9 +34,9 @@ class GameService(val gameRepository: GameRepository, val playerRepository: Play
     }
 
     @Transactional
-    fun setGameFinished(id: String, nickname: String): Game{
+    fun setGameFinished(id: String, name: String): Game{
         val game = gameRepository.findById(id).orElseThrow()
-        val winnerPlayer = game.playerList.find { it.nickname == nickname }
+        val winnerPlayer = game.playerList.find { it.name == name}
         return gameRepository.save(game.copy(status = GAME_STATUS.FINISHED.name, winnerPlayer = winnerPlayer))
     }
 

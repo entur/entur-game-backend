@@ -7,7 +7,8 @@ data class PlayerScore(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val id: Int,
-        val nickname: String,
+        val name: String,
+        val email: String,
         var score: Int,
         var difficulty: String,
         val totalOptions: Int,
@@ -22,7 +23,8 @@ data class PlayerScore(
 )
 
 data class PlayerScoreDto(
-        val nickname: String,
+        val name: String,
+        val email: String,
         val score: Int?,
         val difficulty: String,
         val totalOptions: Int,
@@ -34,7 +36,8 @@ data class PlayerScoreDto(
 
 fun PlayerScore.toResponse(): PlayerScoreDto {
         return PlayerScoreDto(
-                nickname = nickname,
+                name = name,
+                email = email,
                 score = score,
                 difficulty = difficulty,
                 totalOptions = totalOptions,
