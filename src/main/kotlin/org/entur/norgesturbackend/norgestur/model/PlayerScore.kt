@@ -9,6 +9,7 @@ data class PlayerScore(
         val id: Int,
         val name: String,
         val email: String,
+        val phoneNumber: String,
         var score: Int,
         var difficulty: String,
         val totalOptions: Int,
@@ -25,6 +26,7 @@ data class PlayerScore(
 data class PlayerScoreDto(
         val name: String,
         val email: String,
+        val phoneNumber: String,
         val score: Int?,
         val difficulty: String,
         val totalOptions: Int,
@@ -38,6 +40,7 @@ fun PlayerScore.toResponse(): PlayerScoreDto {
         return PlayerScoreDto(
                 name = name,
                 email = email,
+                phoneNumber = phoneNumber,
                 score = score,
                 difficulty = difficulty,
                 totalOptions = totalOptions,
