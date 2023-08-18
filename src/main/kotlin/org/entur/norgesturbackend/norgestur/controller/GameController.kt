@@ -28,9 +28,9 @@ class GameController(val gameService: GameService, val simpMessagingTemplate: Si
         return game.toResponse()
     }
 
-    @PostMapping("/create/nickname/{nickname}")
+    @PostMapping("/create/name/{name}")
     @ResponseStatus(HttpStatus.CREATED)
-    fun createGame(@PathVariable nickname: String): GameResponse {
+    fun createGame(@PathVariable name: String): GameResponse {
         //TODO: Move this to service
         val createdGame = gameService.createGame(
             GameRequest(playerList = emptyList(), owner = null).toDomain(
@@ -40,7 +40,7 @@ class GameController(val gameService: GameService, val simpMessagingTemplate: Si
         )
 
         // Create user
-        val playerRequest = PlayerRequest(nickname = nickname, gameId = createdGame.id!!)
+        val playerRequest = PlayerRequest(name = name, gameId = createdGame.id!!)
         val owner = gameService.joinGame(playerRequest.toDomain())
 
         // Update game with owner
@@ -50,10 +50,10 @@ class GameController(val gameService: GameService, val simpMessagingTemplate: Si
     }
 
 
-    @PostMapping("/join/{id}/nickname/{nickname}")
+    @PostMapping("/join/{id}/name/{name}")
     @ResponseStatus(HttpStatus.CREATED)
-    fun joinGame(@PathVariable id: String, @PathVariable nickname: String): GameResponse {
-        val playerRequest = PlayerRequest(nickname = nickname, gameId = id)
+    fun joinGame(@PathVariable id: String, @PathVariable name: String): GameResponse {
+        val playerRequest = PlayerRequest(name = name, gameId = id)
         gameService.joinGame(playerRequest.toDomain())
         simpMessagingTemplate.convertAndSend("/topic/$id", CommandMessageRequest(COMMAND.REFRESH, null).toResponse())
         return gameService.getGame(id).toResponse()
@@ -72,8 +72,8 @@ class GameController(val gameService: GameService, val simpMessagingTemplate: Si
     }
 
     @MessageMapping("/topic/{id}/finished")
-    fun finishGame(@DestinationVariable id: String, nickname: String) {
-        gameService.setGameFinished(id, nickname)
+    fun finishGame(@DestinationVariable id: String, name: String) {
+        gameService.setGameFinished(id, name)
         // Send Command to everyone in the lobby
         simpMessagingTemplate.convertAndSend("/topic/$id", CommandMessageRequest(COMMAND.FINISHED, null).toResponse())
     }

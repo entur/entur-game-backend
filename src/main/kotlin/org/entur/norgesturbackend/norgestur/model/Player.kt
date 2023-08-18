@@ -7,7 +7,7 @@ data class Player(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Int?,
-    val nickname: String,
+    val name: String,
     @ManyToOne
     @JoinColumn(name = "game_id")
     val game: Game
@@ -15,17 +15,17 @@ data class Player(
 
 data class PlayerResponse(
     val id: Int,
-    val nickname: String,
+    val name: String,
 )
 data class PlayerRequest(
-    val nickname: String,
+    val name: String,
     val gameId: String,
 )
 
 fun PlayerRequest.toDomain(): Player{
     return Player(
         id = null,
-        nickname = nickname,
+        name = name,
         game = Game(
             id = gameId,
             status = GAME_STATUS.WAITING_FOR_PLAYERS.name,
@@ -37,6 +37,6 @@ fun PlayerRequest.toDomain(): Player{
 fun Player.toResponse(): PlayerResponse {
     return PlayerResponse(
         id = id!!,
-        nickname = nickname,
+        name = name,
     )
 }
