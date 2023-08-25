@@ -10,7 +10,7 @@ interface PlayerScoreRepository : JpaRepository<PlayerScore, Int>{
             nativeQuery = true,
             value = "SELECT * FROM player_score WHERE difficulty = (:difficulty) ORDER BY score DESC LIMIT (:size)"
     )
-    fun findScoreByDifficultyAndAmount(
+    fun findScoreByDifficultyAndSize(
             @Param("difficulty") difficulty: String,
             @Param("size") size: Number
     ): List<PlayerScore>
