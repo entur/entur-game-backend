@@ -4,6 +4,7 @@ import org.entur.norgesturbackend.norgestur.model.PlayerScore
 import org.entur.norgesturbackend.norgestur.model.PlayerScoreDto
 import org.entur.norgesturbackend.norgestur.model.toResponse
 import org.entur.norgesturbackend.norgestur.service.PlayerScoreService
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -25,7 +26,7 @@ class PlayerScoreController (val playerScoreService: PlayerScoreService){
     @PostMapping("/player-score")
     fun addPlayerScore(
             @RequestBody playerScore: PlayerScore
-    ): PlayerScore{
-        return playerScoreService.savePlayerScore(playerScore)
+    ): HttpStatus{
+        return playerScoreService.checkForExistingPlayer(playerScore)
     }
 }
