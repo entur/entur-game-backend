@@ -18,9 +18,9 @@ class PlayerScoreController (val playerScoreService: PlayerScoreService){
             @RequestParam size: Number
     ): List<PlayerScoreDto> {
         return if (size.toInt() == 0){
-            playerScoreService.getScoreByDifficultyAndAmount(difficulty.lowercase(), 20).map { it.toResponse() }
+            playerScoreService.getScoreByDifficultyAndSize(difficulty.lowercase(), 20).map { it.toResponse() }
         } else {
-            playerScoreService.getScoreByDifficultyAndAmount(difficulty.lowercase(), size).map { it.toResponse() }
+            playerScoreService.getScoreByDifficultyAndSize(difficulty.lowercase(), size).map { it.toResponse() }
         }
     }
     @GetMapping("/player-score/top-ten-overall")
