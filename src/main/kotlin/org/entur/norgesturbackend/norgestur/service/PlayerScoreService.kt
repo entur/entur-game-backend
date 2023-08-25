@@ -26,7 +26,6 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
             response = savePlayerScore(playerScore, newPlayerScore)
         } else if (matchingPlayer.name == playerScore.name && matchingPlayer.email == playerScore.email && matchingPlayer.phoneNumber == playerScore.phoneNumber){
             if (matchingPlayer.score < newPlayerScore){
-                //playerScoreRepository.updatePlayer(playerScore.email, playerScore.name, playerScore.phoneNumber, newPlayerScore)
                 matchingPlayer.score = newPlayerScore
                 matchingPlayer.totalTravelTime = calculateTravelTime(playerScore.totalTravelTime.toInt())
                 matchingPlayer.totalPlaytime = calculatePlayedTime(playerScore.totalPlaytime.toInt())
