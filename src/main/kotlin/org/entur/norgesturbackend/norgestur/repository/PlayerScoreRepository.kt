@@ -8,11 +8,11 @@ import org.springframework.data.repository.query.Param
 interface PlayerScoreRepository : JpaRepository<PlayerScore, Int>{
     @Query(
             nativeQuery = true,
-            value = "SELECT * FROM player_score WHERE LOWER(difficulty) = (:difficulty) ORDER BY score DESC LIMIT (:amount)"
+            value = "SELECT * FROM player_score WHERE difficulty = (:difficulty) ORDER BY score DESC LIMIT (:size)"
     )
     fun findScoreByDifficultyAndAmount(
             @Param("difficulty") difficulty: String,
-            @Param("amount") amount: Number
+            @Param("size") size: Number
     ): List<PlayerScore>
     @Query(
             nativeQuery = true,
