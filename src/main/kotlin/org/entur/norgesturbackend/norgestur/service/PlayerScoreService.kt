@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service
 @Service
 class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
 
-    fun getTopTenByDifficulty(difficulty: String): List<PlayerScore>{
-        return playerScoreRepository.findTopTenScoresByDifficulty(difficulty)
+    fun getScoreByDifficultyAndSize(difficulty: String, size: Number): List<PlayerScore>{
+        return playerScoreRepository.findScoreByDifficultyAndSize(difficulty, size)
     }
     fun getTopTen(): List<PlayerScore>{
         return playerScoreRepository.findTopTenScores()
