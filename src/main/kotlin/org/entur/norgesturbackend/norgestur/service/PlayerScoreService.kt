@@ -17,28 +17,7 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
 
 
 
-    fun checkForExistingPlayer(playerScore: PlayerScore): HttpStatus {
-        val matchingPlayer = playerScoreRepository.findByEmailNameAndPhoneNumber(playerScore.name, playerScore.email, playerScore.phoneNumber)
-        val newPlayerScore: Int = calculateScore(playerScore)
-        var response: HttpStatus = HttpStatus.BAD_REQUEST
 
-        if (matchingPlayer == null){
-            response = savePlayerScore(playerScore, newPlayerScore)
-        } else if (matchingPlayer.name == playerScore.name && matchingPlayer.email == playerScore.email && matchingPlayer.phoneNumber == playerScore.phoneNumber){
-            if (matchingPlayer.score < newPlayerScore){
-                matchingPlayer.score = newPlayerScore
-                matchingPlayer.totalTravelTime = calculateTravelTime(playerScore.totalTravelTime.toInt())
-                matchingPlayer.totalPlaytime = calculatePlayedTime(playerScore.totalPlaytime.toInt())
-                matchingPlayer.totalOptions = playerScore.totalOptions
-
-                playerScoreRepository.save(matchingPlayer)
-                response = HttpStatus.OK
-            }
-        } else {
-            response = HttpStatus.BAD_REQUEST
-        }
-        return response
-    }
 
     fun calculateScore(playerScore: PlayerScore): Int{
 
@@ -73,15 +52,33 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
 
     }
 
-    fun savePlayerScore(playerScore: PlayerScore, score: Int): HttpStatus{
+    fun savePlayerScore(playerScore: PlayerScore): HttpStatus{
 
-        playerScore.score = score
-        playerScore.totalPlaytime = calculatePlayedTime(playerScore.totalPlaytime.toInt())
-        playerScore.totalTravelTime = calculateTravelTime(playerScore.totalTravelTime.toInt())
+        val matchingPlayer = playerScoreRepository.findByEmailNameAndPhoneNumber(playerScore.name, playerScore.email, playerScore.phoneNumber)
+        val newPlayerScore: Int = calculateScore(playerScore)
+        var response: HttpStatus = HttpStatus.BAD_REQUEST
 
-        playerScoreRepository.save(playerScore)
+        if (matchingPlayer == null){
+            playerScore.score = calculateScore(playerScore)
+            playerScore.totalPlaytime = calculatePlayedTime(playerScore.totalPlaytime.toInt())
+            playerScore.totalTravelTime = calculateTravelTime(playerScore.totalTravelTime.toInt())
 
-        return HttpStatus.CREATED
+            playerScoreRepository.save(playerScore)
+            response = HttpStatus.CREATED
+        } else if (matchingPlayer.name == playerScore.name && matchingPlayer.email == playerScore.email && matchingPlayer.phoneNumber == playerScore.phoneNumber){
+            if (matchingPlayer.score < newPlayerScore){
+                matchingPlayer.score = newPlayerScore
+                matchingPlayer.totalTravelTime = calculateTravelTime(playerScore.totalTravelTime.toInt())
+                matchingPlayer.totalPlaytime = calculatePlayedTime(playerScore.totalPlaytime.toInt())
+                matchingPlayer.totalOptions = playerScore.totalOptions
+
+                playerScoreRepository.save(matchingPlayer)
+                response = HttpStatus.OK
+            }
+        } else {
+            response = HttpStatus.BAD_REQUEST
+        }
+        return response
     }
 
     companion object {

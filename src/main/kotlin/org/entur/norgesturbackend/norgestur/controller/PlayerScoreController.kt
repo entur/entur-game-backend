@@ -27,6 +27,6 @@ class PlayerScoreController (val playerScoreService: PlayerScoreService){
     fun addPlayerScore(
             @RequestBody playerScore: PlayerScore
     ): HttpStatus{
-        return playerScoreService.checkForExistingPlayer(playerScore)
+        return playerScoreService.savePlayerScore(playerScore)
     }
 }
