@@ -2,6 +2,7 @@ package org.entur.norgesturbackend.norgestur.service
 
 import org.entur.norgesturbackend.norgestur.model.PlayerScore
 import org.entur.norgesturbackend.norgestur.repository.PlayerScoreRepository
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 
 @Service
@@ -14,49 +15,13 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
         return playerScoreRepository.findTopTenScores()
     }
 
-    fun savePlayerScore(playerScore: PlayerScore): PlayerScore{
 
-        val hoursPlayTime = playerScore.totalPlaytime.toInt()/3600
-        val minutesPlayTime = (playerScore.totalPlaytime.toInt() % 3600)/60
-        val secondsPlayTime = playerScore.totalPlaytime.toInt()%60
 
-        val hoursTravelTime = playerScore.totalTravelTime.toInt()/3600
-        val minutesTravelTime = (playerScore.totalTravelTime.toInt() % 3600)/60
-        val secondsTravelTime = playerScore.totalTravelTime.toInt()%60
+
+
+    fun calculateScore(playerScore: PlayerScore): Int{
+
         var score = 0.00
-
-
-        val totalHoursPlayed: String = if (hoursPlayTime <= 9){
-            "0$hoursPlayTime"
-        } else {
-            hoursPlayTime.toString()
-        }
-        val totalMinutesPlayed: String = if (minutesPlayTime <= 9){
-            "0$minutesPlayTime"
-        } else {
-            minutesPlayTime.toString()
-        }
-        val totalSecondsPlayed: String = if (secondsPlayTime <= 9){
-            "0$secondsPlayTime"
-        } else {
-            secondsPlayTime.toString()
-        }
-
-        val totalHoursTraveled: String = if (hoursTravelTime <= 9){
-            "0$hoursTravelTime"
-        } else {
-            hoursTravelTime.toString()
-        }
-        val totalMinutesTraveled: String = if (minutesTravelTime <= 9){
-            "0$minutesTravelTime"
-        } else {
-            minutesTravelTime.toString()
-        }
-        val totalSecondsTraveled: String = if (secondsTravelTime <= 9){
-            "0$secondsTravelTime"
-        } else {
-            secondsTravelTime.toString()
-        }
 
         if (playerScore.difficulty.lowercase() == "lett"){
             score = 100.00 * (OPTIMAL_EASY_ROUTE.toDouble() / playerScore.totalOptions.toDouble()) * (OPTIMAL_EASY_TAVEL_TIME.toDouble() / playerScore.totalTravelTime.toDouble())
@@ -67,11 +32,53 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
         } else if (playerScore.difficulty.lowercase() == "event"){
             score = 100.00 * (OPTIMAL_EVENT_ROUTE.toDouble() / playerScore.totalOptions.toDouble()) * (OPTIMAL_EVENT_TAVEL_TIME.toDouble() / playerScore.totalTravelTime.toDouble())
         }
+        return score.toInt()
+    }
 
-        playerScore.score = score.toInt()
-        playerScore.totalPlaytime = "$totalHoursPlayed:$totalMinutesPlayed:$totalSecondsPlayed"
-        playerScore.totalTravelTime = "$totalHoursTraveled:$totalMinutesTraveled:$totalSecondsTraveled"
-        return playerScoreRepository.save(playerScore)
+    fun calculateTravelTime(totalTravelTime: Int): String{
+        val hoursTravelTime = totalTravelTime / 3600
+        val minutesTravelTime = (totalTravelTime % 3600) / 60
+        val secondsTravelTime = totalTravelTime % 60
+
+        return String.format("%02d:%02d:%02d", hoursTravelTime, minutesTravelTime, secondsTravelTime)
+    }
+
+    fun calculatePlayedTime(totalPlayedTime: Int): String{
+        val hoursPlayTime = totalPlayedTime / 3600
+        val minutesPlayTime = (totalPlayedTime % 3600) / 60
+        val secondsPlayTime = totalPlayedTime % 60
+
+        return String.format("%02d:%02d:%02d", hoursPlayTime, minutesPlayTime, secondsPlayTime)
+
+    }
+
+    fun savePlayerScore(playerScore: PlayerScore): HttpStatus{
+
+        val matchingPlayer = playerScoreRepository.findByEmailNameAndPhoneNumber(playerScore.name, playerScore.email, playerScore.phoneNumber)
+        val newPlayerScore: Int = calculateScore(playerScore)
+        var response: HttpStatus = HttpStatus.BAD_REQUEST
+
+        if (matchingPlayer == null){
+            playerScore.score = calculateScore(playerScore)
+            playerScore.totalPlaytime = calculatePlayedTime(playerScore.totalPlaytime.toInt())
+            playerScore.totalTravelTime = calculateTravelTime(playerScore.totalTravelTime.toInt())
+
+            playerScoreRepository.save(playerScore)
+            response = HttpStatus.CREATED
+        } else if (matchingPlayer.name == playerScore.name && matchingPlayer.email == playerScore.email && matchingPlayer.phoneNumber == playerScore.phoneNumber){
+            if (matchingPlayer.score < newPlayerScore){
+                matchingPlayer.score = newPlayerScore
+                matchingPlayer.totalTravelTime = calculateTravelTime(playerScore.totalTravelTime.toInt())
+                matchingPlayer.totalPlaytime = calculatePlayedTime(playerScore.totalPlaytime.toInt())
+                matchingPlayer.totalOptions = playerScore.totalOptions
+
+                playerScoreRepository.save(matchingPlayer)
+                response = HttpStatus.OK
+            }
+        } else {
+            response = HttpStatus.BAD_REQUEST
+        }
+        return response
     }
 
     companion object {

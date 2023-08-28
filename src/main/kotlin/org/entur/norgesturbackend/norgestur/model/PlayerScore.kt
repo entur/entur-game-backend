@@ -12,7 +12,7 @@ data class PlayerScore(
         val phoneNumber: Int,
         var score: Int,
         var difficulty: String,
-        val totalOptions: Int,
+        var totalOptions: Int,
         var totalPlaytime: String,
         var totalTravelTime: String,
         @ManyToOne
