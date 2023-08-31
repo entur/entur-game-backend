@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import java.util.*
 
 @RestController
 class PlayerScoreController (val playerScoreService: PlayerScoreService){
@@ -32,5 +33,12 @@ class PlayerScoreController (val playerScoreService: PlayerScoreService){
             @RequestBody playerScore: PlayerScore
     ): HttpStatus{
         return playerScoreService.savePlayerScore(playerScore)
+    }
+
+    @GetMapping("/player-score/end-game")
+    fun getTextForOptimalRoute(
+        @RequestParam difficulty: String
+    ): String {
+        return playerScoreService.getOptimalRouteText(difficulty.lowercase())
     }
 }
