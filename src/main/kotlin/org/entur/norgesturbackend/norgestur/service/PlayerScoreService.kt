@@ -15,7 +15,22 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
         return playerScoreRepository.findTopTenScores()
     }
 
+    fun getOptimalRouteText(difficulty: String): String{
+        var optimalRoute = ""
 
+        if (difficulty == "lett"){
+            optimalRoute = "Vår reiseplanlegger har beregnet en optimal rute der etapper er " + OPTIMAL_EASY_ROUTE + " og reisetid er " + calculateTravelTime(OPTIMAL_EASY_TRAVEL_TIME)
+        } else if (difficulty == "middels"){
+            optimalRoute = "Vår reiseplanlegger har beregnet en optimal rute der etapper er " + OPTIMAL_MEDIUM_ROUTE + " og reisetid er " + calculateTravelTime(OPTIMAL_MEDIUM_TRAVEL_TIME)
+        } else if (difficulty == "vanskelig"){
+            optimalRoute = "Vår reiseplanlegger har beregnet en optimal rute der etapper er " + OPTIMAL_HARD_ROUTE + " og reisetid er " + calculateTravelTime(OPTIMAL_HARD_TRAVEL_TIME)
+        } else if (difficulty == "event"){
+            optimalRoute = "Vår reiseplanlegger har beregnet en optimal rute der etapper er " + OPTIMAL_EVENT_ROUTE + " og reisetid er " + calculateTravelTime(OPTIMAL_EVENT_TRAVEL_TIME)
+        } else {
+            optimalRoute = "Vanskelighetsgraden $difficulty finnes ikke i back-end."
+        }
+        return optimalRoute
+    }
 
 
 
@@ -24,13 +39,13 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
         var score = 0.00
 
         if (playerScore.difficulty.lowercase() == "lett"){
-            score = 100.00 * (OPTIMAL_EASY_ROUTE.toDouble() / playerScore.totalOptions.toDouble()) * (OPTIMAL_EASY_TAVEL_TIME.toDouble() / playerScore.totalTravelTime.toDouble())
+            score = 100.00 * (OPTIMAL_EASY_ROUTE.toDouble() / playerScore.totalOptions.toDouble()) * (OPTIMAL_EASY_TRAVEL_TIME.toDouble() / playerScore.totalTravelTime.toDouble())
         } else if (playerScore.difficulty.lowercase() == "middels") {
-            score = 100.00 * (OPTIMAL_MEDIUM_ROUTE.toDouble() / playerScore.totalOptions.toDouble()) * (OPTIMAL_MEDIUM_TAVEL_TIME.toDouble() / playerScore.totalTravelTime.toDouble())
+            score = 100.00 * (OPTIMAL_MEDIUM_ROUTE.toDouble() / playerScore.totalOptions.toDouble()) * (OPTIMAL_MEDIUM_TRAVEL_TIME.toDouble() / playerScore.totalTravelTime.toDouble())
         } else if (playerScore.difficulty.lowercase() == "vanskelig"){
-            score = 100.00 * (OPTIMAL_HARD_ROUTE.toDouble() / playerScore.totalOptions.toDouble()) * (OPTIMAL_HARD_TAVEL_TIME.toDouble() / playerScore.totalTravelTime.toDouble())
+            score = 100.00 * (OPTIMAL_HARD_ROUTE.toDouble() / playerScore.totalOptions.toDouble()) * (OPTIMAL_HARD_TRAVEL_TIME.toDouble() / playerScore.totalTravelTime.toDouble())
         } else if (playerScore.difficulty.lowercase() == "event"){
-            score = 100.00 * (OPTIMAL_EVENT_ROUTE.toDouble() / playerScore.totalOptions.toDouble()) * (OPTIMAL_EVENT_TAVEL_TIME.toDouble() / playerScore.totalTravelTime.toDouble())
+            score = 100.00 * (OPTIMAL_EVENT_ROUTE.toDouble() / playerScore.totalOptions.toDouble()) * (OPTIMAL_EVENT_TRAVEL_TIME.toDouble() / playerScore.totalTravelTime.toDouble())
         }
         return score.toInt()
     }
@@ -84,12 +99,12 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
 
     companion object {
         const val OPTIMAL_EASY_ROUTE = 2
-        const val OPTIMAL_EASY_TAVEL_TIME = 27720
+        const val OPTIMAL_EASY_TRAVEL_TIME = 27720
         const val OPTIMAL_MEDIUM_ROUTE = 6
-        const val OPTIMAL_MEDIUM_TAVEL_TIME = 57780
+        const val OPTIMAL_MEDIUM_TRAVEL_TIME = 57780
         const val OPTIMAL_HARD_ROUTE = 7
-        const val OPTIMAL_HARD_TAVEL_TIME = 123000
-        const val OPTIMAL_EVENT_ROUTE = 0
-        const val OPTIMAL_EVENT_TAVEL_TIME = 0
+        const val OPTIMAL_HARD_TRAVEL_TIME = 123000
+        const val OPTIMAL_EVENT_ROUTE = 3
+        const val OPTIMAL_EVENT_TRAVEL_TIME = 20820
     }
 }
