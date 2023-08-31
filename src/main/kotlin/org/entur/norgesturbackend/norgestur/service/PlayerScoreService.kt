@@ -54,6 +54,7 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
 
     fun savePlayerScore(playerScore: PlayerScore): HttpStatus{
         playerScore.difficulty = playerScore.difficulty.lowercase()
+        
         val matchingPlayer = playerScoreRepository.findByEmailNameAndPhoneNumber(playerScore.name, playerScore.email, playerScore.phoneNumber)
         val newPlayerScore: Int = calculateScore(playerScore)
         var response: HttpStatus = HttpStatus.BAD_REQUEST
