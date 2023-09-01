@@ -104,7 +104,7 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository){
         const val OPTIMAL_MEDIUM_TRAVEL_TIME = 57780
         const val OPTIMAL_HARD_ROUTE = 7
         const val OPTIMAL_HARD_TRAVEL_TIME = 123000
-        const val OPTIMAL_EVENT_ROUTE = 3
-        const val OPTIMAL_EVENT_TRAVEL_TIME = 20820
+        const val OPTIMAL_EVENT_ROUTE = 7
+        const val OPTIMAL_EVENT_TRAVEL_TIME = 7620
     }
 }
