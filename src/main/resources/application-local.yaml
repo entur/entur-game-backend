@@ -1,4 +1,5 @@
 spring:
+  secret: hjklsdfjiklosdfjikoasdfjikloasd
   datasource:
     driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/norgestur-db

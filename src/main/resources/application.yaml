@@ -1,4 +1,5 @@
 spring:
+  secret: ${SECRET}
   profiles:
     active: ${ENVIRONMENT:local}
   datasource:
