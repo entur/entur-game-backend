@@ -21,6 +21,6 @@ class GameModeService (val gameModeRepository: GameModeRepository, val playerSco
 
     fun getOptimalRouteText(difficulty: String): String{
         val gameMode = gameModeRepository.findGameModeByDifficulty(difficulty)
-        return "Vår reiseplanlegger har beregnet en optimal rute der etrapper er " + gameMode.optimalRoute + " og reisetid er " + playerScoreService.calculateTravelTime(gameMode.optimalTravelTime)
+        return "Vår reiseplanlegger har beregnet en optimal rute der etapper er " + gameMode.optimalRoute + " og reisetid er " + playerScoreService.calculateTravelTime(gameMode.optimalTravelTime)
     }
 }
