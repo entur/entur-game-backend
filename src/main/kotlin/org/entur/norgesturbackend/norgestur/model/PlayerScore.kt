@@ -21,6 +21,7 @@ data class PlayerScore(
         @ManyToOne
         @JoinColumn(name = "to_destination", referencedColumnName = "id")
         val toDestination: Destination,
+        var timesPlayed: Int,
 )
 
 data class PlayerScoreDto(
@@ -33,7 +34,8 @@ data class PlayerScoreDto(
         val totalPlaytime: String,
         val totalTravelTime: String,
         val fromDestination: Destination,
-        val toDestination: Destination
+        val toDestination: Destination,
+        val timesPlayed: Int
 )
 
 fun PlayerScore.toResponse(): PlayerScoreDto {
@@ -47,7 +49,8 @@ fun PlayerScore.toResponse(): PlayerScoreDto {
                 totalPlaytime = totalPlaytime,
                 totalTravelTime = totalTravelTime,
                 fromDestination = fromDestination,
-                toDestination = toDestination
+                toDestination = toDestination,
+                timesPlayed = timesPlayed
         )
 
 }

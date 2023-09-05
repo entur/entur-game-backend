@@ -17,9 +17,9 @@ class PlayerScoreController (val playerScoreService: PlayerScoreService){
     @Autowired
     lateinit var myProperties: MyProperties
 
-    @GetMapping("/player-score")
+    @GetMapping("/player-score/{difficulty}")
     fun getPlayerScoreByDifficulty(
-            @RequestParam difficulty: String,
+            @PathVariable difficulty: String,
             @RequestParam(defaultValue = "20") size: Number
     ): List<PlayerScoreDto> {
             return playerScoreService.getScoreByDifficultyAndSize(difficulty.lowercase(), size).map { it.toResponse() }
@@ -36,15 +36,8 @@ class PlayerScoreController (val playerScoreService: PlayerScoreService){
             @RequestHeader("Auth") secret: String
     ): HttpStatus{
 
-        if ( secret != myProperties.secret) return HttpStatus.BAD_REQUEST
+        if ( secret != myProperties.secret) return HttpStatus.FORBIDDEN
 
         return playerScoreService.savePlayerScore(playerScore)
-    }
-
-    @GetMapping("/player-score/end-game")
-    fun getTextForOptimalRoute(
-        @RequestParam difficulty: String
-    ): String {
-        return playerScoreService.getOptimalRouteText(difficulty.lowercase())
     }
 }
