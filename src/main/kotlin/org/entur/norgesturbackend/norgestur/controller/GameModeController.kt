@@ -2,6 +2,8 @@ package org.entur.norgesturbackend.norgestur.controller
 
 import org.entur.norgesturbackend.norgestur.config.MyProperties
 import org.entur.norgesturbackend.norgestur.model.GameMode
+import org.entur.norgesturbackend.norgestur.model.GameModeDto
+import org.entur.norgesturbackend.norgestur.model.toDTO
 import org.entur.norgesturbackend.norgestur.service.GameModeService
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
@@ -20,8 +22,8 @@ class GameModeController(val gameModeService: GameModeService, val myProperties:
     @GetMapping("/game-mode/{difficulty}")
     fun getGameModeByDifficulty(
         @PathVariable difficulty: String,
-    ): GameMode {
-        return gameModeService.getGameModeById(difficulty)
+    ): GameModeDto {
+        return gameModeService.getGameModeById(difficulty).toDTO()
     }
 
     @GetMapping("/game-mode/optimal-route/{difficulty}")
