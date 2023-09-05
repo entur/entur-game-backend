@@ -36,15 +36,8 @@ class PlayerScoreController (val playerScoreService: PlayerScoreService){
             @RequestHeader("Auth") secret: String
     ): HttpStatus{
 
-        if ( secret != myProperties.secret) return HttpStatus.BAD_REQUEST
+        if ( secret != myProperties.secret) return HttpStatus.FORBIDDEN
 
         return playerScoreService.savePlayerScore(playerScore)
-    }
-
-    @GetMapping("/player-score/end-game")
-    fun getTextForOptimalRoute(
-        @RequestParam difficulty: String
-    ): String {
-        return playerScoreService.getOptimalRouteText(difficulty.lowercase())
     }
 }
