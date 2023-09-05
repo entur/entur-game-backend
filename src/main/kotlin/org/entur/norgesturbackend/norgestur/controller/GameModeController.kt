@@ -3,7 +3,6 @@ package org.entur.norgesturbackend.norgestur.controller
 import org.entur.norgesturbackend.norgestur.config.MyProperties
 import org.entur.norgesturbackend.norgestur.model.GameMode
 import org.entur.norgesturbackend.norgestur.service.GameModeService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
@@ -13,19 +12,17 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class GameModeController (val gameModeService: GameModeService) {
+class GameModeController (val gameModeService: GameModeService, val myProperties: MyProperties) {
 
-    @Autowired
-    lateinit var myProperties: MyProperties
 
-    @GetMapping("/game-mode/")
+    @GetMapping("/game-mode")
     fun getGameModeByDifficulty(
         @RequestParam difficulty: String,
     ): GameMode {
         return gameModeService.getGameModeById(difficulty)
     }
 
-    @GetMapping("/game-mode/optimal-route")
+    @GetMapping("/game-mode/optimal-route/")
     fun getOptimalRouteText(
         @RequestParam difficulty: String
     ): String{

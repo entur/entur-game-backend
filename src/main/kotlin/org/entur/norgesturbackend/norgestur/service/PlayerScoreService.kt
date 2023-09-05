@@ -12,8 +12,6 @@ import org.springframework.stereotype.Service
 @Service
 class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository, val gameModeRepository: GameModeRepository){
 
-    @Autowired
-    lateinit var myProperties: MyProperties
 
 
 
@@ -59,6 +57,7 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository, val
             playerScore.score = calculateScore(playerScore)
             playerScore.totalPlaytime = calculatePlayedTime(playerScore.totalPlaytime.toInt())
             playerScore.totalTravelTime = calculateTravelTime(playerScore.totalTravelTime.toInt())
+            playerScore.timesPlayed = 1
 
             playerScoreRepository.save(playerScore)
             response = HttpStatus.CREATED
@@ -68,6 +67,7 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository, val
                 matchingPlayer.totalTravelTime = calculateTravelTime(playerScore.totalTravelTime.toInt())
                 matchingPlayer.totalPlaytime = calculatePlayedTime(playerScore.totalPlaytime.toInt())
                 matchingPlayer.totalOptions = playerScore.totalOptions
+                matchingPlayer.timesPlayed ++
 
                 playerScoreRepository.save(matchingPlayer)
                 response = HttpStatus.OK
