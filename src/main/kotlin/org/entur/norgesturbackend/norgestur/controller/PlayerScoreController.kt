@@ -22,7 +22,7 @@ class PlayerScoreController (val playerScoreService: PlayerScoreService){
             @PathVariable difficulty: String,
             @RequestParam(defaultValue = "20") size: Number
     ): List<PlayerScoreDto> {
-            return playerScoreService.getScoreByDifficultyAndSize(difficulty.lowercase(), size).map { it.toResponse() }
+            return playerScoreService.getScoreByDifficultyAndSize(difficulty , size).map { it.toResponse() }
     }
 
     @GetMapping("/player-score/top-ten-overall")
