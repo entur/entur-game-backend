@@ -14,5 +14,7 @@ interface GameModeRepository : JpaRepository<GameMode, Int> {
     )
     fun findGameModeByDifficulty(
         @Param("difficulty") difficulty: String
-    ): GameMode
+    ): GameMode?
+
+    fun findGameModeByActiveEvent(activeEvent: Boolean): GameMode?
 }

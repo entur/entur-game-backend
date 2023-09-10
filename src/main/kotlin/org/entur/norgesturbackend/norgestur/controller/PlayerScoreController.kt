@@ -6,7 +6,6 @@ import org.entur.norgesturbackend.norgestur.model.PlayerScoreDto
 import org.entur.norgesturbackend.norgestur.model.toResponse
 import org.entur.norgesturbackend.norgestur.service.PlayerScoreService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import java.util.*

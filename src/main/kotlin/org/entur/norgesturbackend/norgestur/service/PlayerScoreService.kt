@@ -1,19 +1,13 @@
 package org.entur.norgesturbackend.norgestur.service
 
-import org.entur.norgesturbackend.norgestur.config.MyProperties
-import org.entur.norgesturbackend.norgestur.model.GameMode
 import org.entur.norgesturbackend.norgestur.model.PlayerScore
 import org.entur.norgesturbackend.norgestur.repository.GameModeRepository
 import org.entur.norgesturbackend.norgestur.repository.PlayerScoreRepository
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 
 @Service
 class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository, val gameModeRepository: GameModeRepository){
-
-
-
 
     fun getScoreByDifficultyAndSize(difficulty: String, size: Number): List<PlayerScore>{
         return playerScoreRepository.findScoreByDifficultyAndSize(difficulty, size)
@@ -22,10 +16,9 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository, val
         return playerScoreRepository.findTopTenScores()
     }
 
-
-
     fun calculateScore(playerScore: PlayerScore): Int{
         val gameMode = gameModeRepository.findGameModeByDifficulty(playerScore.difficulty)
+        if(gameMode == null) return 0
         return (100.00 * (gameMode.optimalRoute.toDouble() / playerScore.totalOptions.toDouble()) * (gameMode.optimalTravelTime.toDouble() / playerScore.totalTravelTime.toDouble())).toInt()
     }
 
@@ -47,8 +40,6 @@ class PlayerScoreService (val playerScoreRepository : PlayerScoreRepository, val
     }
 
     fun savePlayerScore(playerScore: PlayerScore): HttpStatus{
-        playerScore.difficulty = playerScore.difficulty
-        
         val matchingPlayer = playerScoreRepository.findByEmailNameAndPhoneNumber(playerScore.name, playerScore.email, playerScore.phoneNumber)
         val newPlayerScore: Int = calculateScore(playerScore)
         var response: HttpStatus = HttpStatus.BAD_REQUEST

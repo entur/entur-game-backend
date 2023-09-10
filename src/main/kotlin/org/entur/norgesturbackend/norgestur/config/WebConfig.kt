@@ -7,12 +7,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 import org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean
 
-
 @Configuration
 @EnableWebMvc
 class WebConfig : WebMvcConfigurer {
     override fun addCorsMappings(registry: CorsRegistry) {
-        registry.addMapping("/**")
+        registry.addMapping("/**").allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
     }
 
     @Bean

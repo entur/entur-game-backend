@@ -18,6 +18,7 @@ data class GameMode(
     val difficulty: String,
     val optimalRoute: Int,
     val optimalTravelTime: Int,
+    val activeEvent: Boolean
 )
 
 data class NSRLocation(
@@ -35,6 +36,7 @@ data class GameModeDto(
     val difficulty: String,
     val optimalRoute: Int,
     val optimalTravelTime: Int,
+    val activeEvent: Boolean,
 )
 
 fun GameMode.toDTO(): GameModeDto {
@@ -59,5 +61,6 @@ fun GameMode.toDTO(): GameModeDto {
         difficulty = difficulty,
         optimalRoute = optimalRoute,
         optimalTravelTime = optimalTravelTime,
+        activeEvent = activeEvent,
     )
 }
