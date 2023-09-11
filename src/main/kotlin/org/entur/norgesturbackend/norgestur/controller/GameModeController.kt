@@ -29,9 +29,17 @@ class GameModeController(val gameModeService: GameModeService, val myProperties:
         }
     }
 
+    @PostMapping("/game-mode")
+    fun addGameMode(
+        @RequestBody gameMode: GameMode,
+        @RequestHeader("Auth") secret: String
+    ): HttpStatus {
+        if (secret != myProperties.secret) return HttpStatus.FORBIDDEN
+        return gameModeService.saveGameMode(gameMode)
+    }
+
     @GetMapping("/game-mode")
-    fun getAllGameMode(
-    ): ResponseEntity<List<GameModeDto>> {
+    fun getAllGameMode(): ResponseEntity<List<GameModeDto>> {
         val gameModeDTOs = gameModeService.getAllGameMode().map { it.toDTO() }
         return ResponseEntity.ok(gameModeDTOs)
     }
@@ -56,14 +64,6 @@ class GameModeController(val gameModeService: GameModeService, val myProperties:
         return ResponseEntity.ok().headers(responseHeaders).body(gameModeService.getOptimalRouteText(difficulty))
     }
 
-    @PostMapping("/game-mode")
-    fun addGameMode(
-        @RequestBody gameMode: GameMode,
-        @RequestHeader("Auth") secret: String
-    ): HttpStatus {
-        if (secret != myProperties.secret) return HttpStatus.FORBIDDEN
-        return gameModeService.saveGameMode(gameMode)
-    }
 
     @PutMapping("/game-mode/active-event/{difficulty}")
     fun updateActiveEvent(
