@@ -1,0 +1,20 @@
+common:
+  env: prd
+  ingress:
+    host:
+      agreements-backend.entur.io
+  container:
+    cpu: 1
+    memory: 640
+    replicas: 3
+    maxReplicas: 3
+  configmap:
+    enabled: true
+    toEnv: true
+    data:
+      env_name: production
+      TZx: "Europe/Oslo"
+      db_url: jdbc:postgresql://localhost:5432/prd_entur-game-db
+  postgres:
+    cpu: 1
+    memory: 64

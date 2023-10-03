@@ -1,0 +1,20 @@
+common:
+  env: tst
+  ingress:
+    host:
+      agreements-backend.staging.entur.io
+  container:
+    cpu: 1
+    memory: 640
+    replicas: 2
+    maxReplicas: 2
+  configmap:
+    enabled: true
+    toEnv: true
+    data:
+      env_name: staging
+      TZx: "Europe/Oslo"
+      db_url: jdbc:postgresql://localhost:5432/tst_entur-game-db
+  postgres:
+    cpu: 1
+    memory: 64

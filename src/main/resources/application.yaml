@@ -3,14 +3,20 @@ spring:
   profiles:
     active: ${ENVIRONMENT:local}
   datasource:
-    driverClassName: org.postgresql.Driver
-    url: ${DATABASE_URL}
-    username: ${PGUSER}
-    password: ${PGPASSWORD}
+    driver-class-name: org.postgresql.Driver
+    url: ${db_url:jdbc:postgresql://localhost:5432/entur-game-db}
+    username: ${PGUSER:postgres}
+    password: ${PGPASSWORD:Entur123}
+    hikari:
+      maximum-pool-size: 2
   jpa:
     show-sql: true
 #    generate-ddl: true
   flyway:
-#    enabled: false
-    enabled: true
-    validate-on-migrate: true
+    locations: classpath:db/migration
+    url: ${db_url:jdbc:postgresql://localhost:5432/entur-game-db}
+    user: ${PGUSER:postgres}
+    password: ${PGPASSWORD:Entur123}
+    placeholderReplacement: false
+    schemas: public
+    default-schema: public
