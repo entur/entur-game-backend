@@ -1,0 +1,6 @@
+INSERT INTO game_mode(id, game_name, game_description, nsr_start_location, nsr_start_name, nsr_start_latitude, nsr_start_longitude, nsr_end_location, nsr_end_name, difficulty, optimal_route, optimal_travel_time)
+VALUES('DnVuK', 'Jernbanetorget - Trondheim S', 'Fra Jernbanetorget til Trondheim S', 'NSR:StopPlace:58366', 'Jernbanetorget, Oslo', 59.911898, 10.75038, 'NSR:StopPlace:59977', 'Trondheim S, Trondheim', 'Lett', 2, 34020),
+      ('SrKkB', 'Mandal - Sjusjøen', 'Fra Mandal Sentrum i til Sjusjøen Sentrum.', 'NSR:StopPlace:22329', 'Mandal Sentrum', 58.028973, 7.460195, 'NSR:StopPlace:9625', 'Sjusjøen Sentrum', 'Middels', 6, 57780),
+      ('x8iaz', 'Halden - Harstad', 'Fra Halden til Harstad', 'NSR:StopPlace:60053', 'Halden', 59.120252, 11.384361, 'NSR:StopPlace:198', 'Halden Stasjon', 'Vanskelig', 7, 123000),
+      ('j54ls', 'Hokksund - Alna senter', 'Fra Hokksund til Alna senter', 'NSR:StopPlace:58834', 'Hokksund', 59.767177, 9.91113, 'NSR:StopPlace:6237', 'Alna senter', 'Javazone1', 7, 7620),
+      ('k2s21', 'Ski stasjon - Alexander Kiellands plass, Oslo', 'Fra Ski stasjon til Alexander Kiellands plass, Oslo', 'NSR:StopPlace:60944', 'Ski stasjon', 59.7191, 10.8355, 'NSR:StopPlace:6288', 'Alexander Kiellands plass', 'Javazone42', 3, 1920);
