@@ -21,8 +21,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-configuration-processor")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springframework:spring-websocket:6.0.12")
-	implementation("org.springframework:spring-messaging:6.0.12")
+	implementation("org.springframework:spring-websocket:6.1.10")
+	implementation("org.springframework:spring-messaging:6.1.10")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.flywaydb:flyway-core")
