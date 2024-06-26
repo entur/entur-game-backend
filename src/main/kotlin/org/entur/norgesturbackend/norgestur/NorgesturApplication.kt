@@ -9,3 +9,4 @@ class NorgesturApplication
 fun main(args: Array<String>) {
 	runApplication<NorgesturApplication>(*args)
 }
+
