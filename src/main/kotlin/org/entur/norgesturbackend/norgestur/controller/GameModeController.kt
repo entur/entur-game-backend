@@ -70,7 +70,6 @@ class GameModeController(val gameModeService: GameModeService, val myProperties:
         @PathVariable difficulty: String,
         @RequestHeader("Auth") secret: String
     ): HttpStatus {
-        if (secret != myProperties.secret) return HttpStatus.FORBIDDEN
         return gameModeService.updateEvent(difficulty)
     }
 }
