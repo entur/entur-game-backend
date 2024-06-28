@@ -32,10 +32,7 @@ class PlayerScoreController (val playerScoreService: PlayerScoreService){
     @PostMapping("/player-score")
     fun addPlayerScore(
             @RequestBody playerScore: PlayerScore,
-            @RequestHeader("Auth") secret: String
     ): HttpStatus{
-
-        if ( secret != myProperties.secret) return HttpStatus.FORBIDDEN
 
         return playerScoreService.savePlayerScore(playerScore)
     }
