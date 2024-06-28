@@ -29,4 +29,3 @@ data class Event(
     @Column(name = "optimal_travel_time", nullable = false)
     val optimalTravelTime: Int
 )
-
