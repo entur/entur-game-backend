@@ -68,7 +68,6 @@ class GameModeController(val gameModeService: GameModeService, val myProperties:
     @PutMapping("/game-mode/active-event/{difficulty}")
     fun updateActiveEvent(
         @PathVariable difficulty: String,
-        @RequestHeader("Auth") secret: String
     ): HttpStatus {
         return gameModeService.updateEvent(difficulty)
     }
