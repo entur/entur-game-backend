@@ -1,9 +1,9 @@
 -- Inserting data into the JOURNEY table
 INSERT INTO JOURNEY (name, startLocationId, endLocationId, startTime, optimalJourney, optimalTravelTime)
 VALUES
-    ('Journey 1: easy', 'NSR:StopPlace:58366', 'NSR:StopPlace:59977', '2024-06-01 10:00:00', 2, 34020),
-    ('Journey 2: middle', 'NSR:StopPlace:22329', 'NSR:StopPlace:9625', '2024-06-01 11:00:00', 6, 57780),
-    ('Journey 3: hard', 'NSR:StopPlace:58366', 'NSR:StopPlace:198', '2024-06-01 12:00:00', 7, 123000);
+    ('Journey 1', 'LocationA', 'LocationB', '2022-12-01 10:00:00', 1, 120),
+    ('Journey 2', 'LocationB', 'LocationC', '2022-12-02 11:00:00', 2, 150),
+    ('Journey 3', 'LocationC', 'LocationD', '2022-12-03 12:00:00', 3, 180);
 
 -- Inserting data into the EVENT table
 INSERT INTO EVENT (name, journeyId)
