@@ -1,6 +1,6 @@
 CREATE TABLE JOURNEY (
-    id serial PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    journeyId serial PRIMARY KEY,
+    journeyName VARCHAR(100) NOT NULL,
     startLocationId VARCHAR(100) NOT NULL,
     endLocationId VARCHAR(100) NOT NULL,
     startTime TIMESTAMP NOT NULL,
@@ -9,15 +9,15 @@ CREATE TABLE JOURNEY (
 );
 
 CREATE TABLE EVENT (
-    id serial PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    eventId serial PRIMARY KEY,
+    eventName VARCHAR(100) NOT NULL,
     journeyId INT NOT NULL,
-    FOREIGN KEY (journeyId) REFERENCES JOURNEY(id)
+    FOREIGN KEY (journeyId) REFERENCES JOURNEY(journeyId)
 );
 
 CREATE TABLE PLAYER (
-    id serial PRIMARY KEY,
-    name VARCHAR(30) NOT NULL,
+    playerId serial PRIMARY KEY,
+    playerName VARCHAR(30) NOT NULL,
     score INT,
     totalSteps INT,
     totalTravelTime INT,
@@ -25,5 +25,5 @@ CREATE TABLE PLAYER (
     email VARCHAR(255) NOT NULL,
     phoneNr VARCHAR(16) NOT NULL, -- varchar because of leading zeroes and plus sign
     eventId INT,
-    FOREIGN KEY (eventId) REFERENCES EVENT(id)
+    FOREIGN KEY (eventId) REFERENCES EVENT(eventId)
 );

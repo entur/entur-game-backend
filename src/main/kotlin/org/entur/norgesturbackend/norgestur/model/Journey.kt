@@ -4,20 +4,22 @@ import jakarta.persistence.*
 import java.time.LocalDateTime
 
 @Entity
+@Table(name = "JOURNEY")
 data class Journey(
     @Id
-    @Column(name = "id")
-    val id: Int,
-    @Column(name = "name")
-    val name: String,
-    @Column(name = "startlocationid")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "journeyId")
+    val journeyId: Long = 0,
+    @Column(name = "journeyName", nullable = false)
+    val journeyName: String,
+    @Column(name = "startLocationId", nullable = false)
     val startLocationId: String,
-    @Column(name = "endlocationid")
+    @Column(name = "endLocationId", nullable = false)
     val endLocationId: String,
-    @Column(name = "starttime")
+    @Column(name = "startTime", nullable = false)
     val startTime: LocalDateTime,
-    @Column(name = "optimaljourney")
-    val optimalJourney: String,
-    @Column(name = "optimaltraveltime")
-    val optimalTravelTime: Int,
+    @Column(name = "optimalJourney", nullable = false)
+    val optimalJourney: Int,
+    @Column(name = "optimalTravelTime", nullable = false)
+    val optimalTravelTime: Int
 )
