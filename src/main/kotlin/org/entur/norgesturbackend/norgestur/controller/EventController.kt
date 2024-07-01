@@ -1,4 +1,14 @@
 package org.entur.norgesturbackend.norgestur.controller
 
-class EventController {
+import org.entur.norgesturbackend.norgestur.model.Event
+import org.springframework.web.bind.annotation.*
+import org.entur.norgesturbackend.norgestur.service.EventService
+
+@RestController
+class EventController(private val eventService: EventService) {
+
+    @GetMapping("/test/all")
+    fun getAllEventsWithJourney(): List<Event> {
+        return eventService.getAllEvents()
+    }
 }

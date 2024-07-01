@@ -10,5 +10,5 @@ interface PlayerRepository : JpaRepository<Player, Int> {
         nativeQuery = true,
         value = "SELECT * FROM player"
     )
-    fun findAllPlayer(): List<Player>
+    fun findAllPlayers(): List<Player>
 }
