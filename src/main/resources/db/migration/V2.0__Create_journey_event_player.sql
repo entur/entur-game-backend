@@ -4,7 +4,7 @@ CREATE TABLE JOURNEY (
                          startLocationId VARCHAR(100) NOT NULL,
                          endLocationId VARCHAR(100) NOT NULL,
                          startTime TIMESTAMP NOT NULL,
-                         optimalJourney INT NOT NULL,
+                         optimalStepNr INT NOT NULL,
                          optimalTravelTime INT NOT NULL
 );
 
@@ -19,7 +19,7 @@ CREATE TABLE PLAYER (
                         playerId serial PRIMARY KEY,
                         playerName VARCHAR(30) NOT NULL,
                         score INT,
-                        totalSteps INT,
+                        totalStepNr INT,
                         totalTravelTime INT,
                         totalPlayTime INT,
                         email VARCHAR(255) NOT NULL,
