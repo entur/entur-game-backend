@@ -7,8 +7,8 @@ import org.entur.norgesturbackend.norgestur.service.JourneyService
 @RestController
 class JourneyController(private val journeyService: JourneyService) {
 
-    @GetMapping("/test/all")
-    fun getAllJourneysWithJourney(): List<Journey> {
+    @GetMapping("/journey/all")
+    fun getAllJourneys(): List<Journey> {
         return journeyService.getAllJourneys()
     }
 }

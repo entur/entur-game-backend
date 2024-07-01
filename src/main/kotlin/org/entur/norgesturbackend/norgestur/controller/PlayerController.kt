@@ -7,8 +7,8 @@ import org.entur.norgesturbackend.norgestur.service.PlayerService
 @RestController
 class PlayerController(private val playerService: PlayerService) {
 
-    @GetMapping("/test/all")
-    fun getAllPlayersWithPlayer(): List<Player> {
+    @GetMapping("/player/all")
+    fun getAllPlayers(): List<Player> {
         return playerService.getAllPlayers()
     }
 }

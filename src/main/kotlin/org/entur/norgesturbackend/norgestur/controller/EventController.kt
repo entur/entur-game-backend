@@ -7,8 +7,8 @@ import org.entur.norgesturbackend.norgestur.service.EventService
 @RestController
 class EventController(private val eventService: EventService) {
 
-    @GetMapping("/test/all")
-    fun getAllEventsWithJourney(): List<Event> {
+    @GetMapping("/event/all")
+    fun getAllEvents(): List<Event> {
         return eventService.getAllEvents()
     }
 }
