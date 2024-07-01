@@ -1,5 +1,6 @@
 package org.entur.norgesturbackend.norgestur.model
 
+import java.time.LocalDateTime
 import jakarta.persistence.*
 
 @Entity
@@ -9,9 +10,23 @@ data class Event(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "eventId")
     val eventId: Long = 0,
+
     @Column(name = "eventName", nullable = false)
     val eventName: String,
-    @ManyToOne
-    @JoinColumn(name = "journeyId", nullable = false)
-    val journey: Journey
+
+    @Column(name = "startLocationId", nullable = false)
+    val startLocationId: String,
+
+    @Column(name = "endLocationId", nullable = false)
+    val endLocationId: String,
+
+    @Column(name = "startTime", nullable = false)
+    val startTime: LocalDateTime,
+
+    @Column(name = "optimalStepNumber", nullable = false)
+    val optimalStepNumber: Int,
+
+    @Column(name = "optimalTravelTime", nullable = false)
+    val optimalTravelTime: Int
 )
+
