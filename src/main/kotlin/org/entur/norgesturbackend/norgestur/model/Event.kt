@@ -8,25 +8,25 @@ import jakarta.persistence.*
 data class Event(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "eventId")
+    @Column(name = "event_id")
     val eventId: Long = 0,
 
-    @Column(name = "eventName", nullable = false)
+    @Column(name = "event_name", nullable = false)
     val eventName: String,
 
-    @Column(name = "startLocationId", nullable = false)
+    @Column(name = "start_location_id", nullable = false)
     val startLocationId: String,
 
-    @Column(name = "endLocationId", nullable = false)
+    @Column(name = "end_location_id", nullable = false)
     val endLocationId: String,
 
-    @Column(name = "startTime", nullable = false)
+    @Column(name = "start_time", nullable = false)
     val startTime: LocalDateTime,
 
-    @Column(name = "optimalStepNumber", nullable = false)
+    @Column(name = "optimal_step_number", nullable = false)
     val optimalStepNumber: Int,
 
-    @Column(name = "optimalTravelTime", nullable = false)
+    @Column(name = "optimal_travel_time", nullable = false)
     val optimalTravelTime: Int
 )
 

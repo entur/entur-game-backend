@@ -7,26 +7,26 @@ import jakarta.persistence.*
 data class Score(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "scoreId")
+    @Column(name = "score_id")
     val scoreId: Long = 0,
 
-    @Column(name = "scoreValue", nullable = false)
+    @Column(name = "score_value", nullable = false)
     val scoreValue: Int,
 
-    @Column(name = "totalStepNumber", nullable = false)
+    @Column(name = "total_step_number", nullable = false)
     val totalStepNumber: Int,
 
-    @Column(name = "totalTravelTime", nullable = false)
+    @Column(name = "total_travel_time", nullable = false)
     val totalTravelTime: Int,
 
-    @Column(name = "totalPlayTime", nullable = false)
+    @Column(name = "total_play_time", nullable = false)
     val totalPlayTime: Int,
 
     @ManyToOne
-    @JoinColumn(name = "eventId", nullable = false)
+    @JoinColumn(name = "event_id", nullable = false)
     val event: Event,
 
     @ManyToOne
-    @JoinColumn(name = "playerId", nullable = false)
+    @JoinColumn(name = "player_id", nullable = false)
     val player: Player
 )
