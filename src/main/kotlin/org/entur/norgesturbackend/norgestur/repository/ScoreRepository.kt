@@ -11,4 +11,15 @@ interface ScoreRepository : JpaRepository<Score, Int> {
         value = "SELECT * FROM score"
     )
     fun findAllScores(): List<Score>
+
+    @Query(
+        nativeQuery = true,
+        value = """
+            SELECT score.* FROM score 
+            JOIN player ON player.player_id = score.player_id
+            JOIN event ON event.event_id = score.event_id 
+            WHERE event.is_active = true
+            """
+    )
+    fun findScoresByActiveEvent(): List<Score>
 }
