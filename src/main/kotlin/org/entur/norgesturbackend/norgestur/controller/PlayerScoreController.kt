@@ -33,7 +33,6 @@ class PlayerScoreController (val playerScoreService: PlayerScoreService){
     fun addPlayerScore(
             @RequestBody playerScore: PlayerScore,
     ): HttpStatus{
-        println("Received playerScore: $playerScore") // Logging
         return playerScoreService.savePlayerScore(playerScore)
     }
 }

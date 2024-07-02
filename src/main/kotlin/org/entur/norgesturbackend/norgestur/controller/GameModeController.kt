@@ -31,10 +31,8 @@ class GameModeController(val gameModeService: GameModeService, val myProperties:
 
     @PostMapping("/game-mode")
     fun addGameMode(
-        @RequestBody gameMode: GameMode,
-        @RequestHeader("Auth") secret: String
+        @RequestBody gameMode: GameMode
     ): HttpStatus {
-        if (secret != myProperties.secret) return HttpStatus.FORBIDDEN
         return gameModeService.saveGameMode(gameMode)
     }
 
