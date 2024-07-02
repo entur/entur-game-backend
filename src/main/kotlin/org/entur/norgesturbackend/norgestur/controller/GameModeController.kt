@@ -20,26 +20,13 @@ import org.springframework.web.bind.annotation.RestController
 class GameModeController(val gameModeService: GameModeService, val myProperties: MyProperties) {
 
 
-    @GetMapping("/game-mode/active-event")
-    fun getEvent(): ResponseEntity<GameModeDto> {
-        return when (val gameMode = gameModeService.getEvent()) {
-            null -> ResponseEntity.notFound().build()
-            else -> ResponseEntity.ok(gameMode.toDTO())
-
-        }
-    }
-
-    @PostMapping("/game-mode")
-    fun addGameMode(
-        @RequestBody gameMode: GameMode
-    ): HttpStatus {
-        return gameModeService.saveGameMode(gameMode)
-    }
-
-    @GetMapping("/game-mode")
-    fun getAllGameMode(): ResponseEntity<List<GameModeDto>> {
-        val gameModeDTOs = gameModeService.getAllGameMode().map { it.toDTO() }
-        return ResponseEntity.ok(gameModeDTOs)
+    @GetMapping("/game-mode/optimal-route/{difficulty}")
+    fun getOptimalRouteText(
+        @PathVariable difficulty: String,
+    ): ResponseEntity<String> {
+        val responseHeaders = HttpHeaders()
+        responseHeaders["Content-Type"] = "text/plain;charset=utf-8"
+        return ResponseEntity.ok().headers(responseHeaders).body(gameModeService.getOptimalRouteText(difficulty))
     }
 
     @GetMapping("/game-mode/{difficulty}")
@@ -53,15 +40,28 @@ class GameModeController(val gameModeService: GameModeService, val myProperties:
         }
     }
 
-    @GetMapping("/game-mode/optimal-route/{difficulty}")
-    fun getOptimalRouteText(
-        @PathVariable difficulty: String,
-    ): ResponseEntity<String> {
-        val responseHeaders = HttpHeaders()
-        responseHeaders["Content-Type"] = "text/plain;charset=utf-8"
-        return ResponseEntity.ok().headers(responseHeaders).body(gameModeService.getOptimalRouteText(difficulty))
+//    @PostMapping("/game-mode")
+//    fun addGameMode(
+//        @RequestBody gameMode: GameMode
+//    ): HttpStatus {
+//        return gameModeService.saveGameMode(gameMode)
+//    }
+
+    @GetMapping("/game-mode")
+    fun getAllGameMode(): ResponseEntity<List<GameModeDto>> {
+        val gameModeDTOs = gameModeService.getAllGameMode().map { it.toDTO() }
+        return ResponseEntity.ok(gameModeDTOs)
     }
 
+
+    @GetMapping("/game-mode/active-event")
+    fun getEvent(): ResponseEntity<GameModeDto> {
+        return when (val gameMode = gameModeService.getEvent()) {
+            null -> ResponseEntity.notFound().build()
+            else -> ResponseEntity.ok(gameMode.toDTO())
+
+        }
+    }
 
     @PutMapping("/game-mode/active-event/{difficulty}")
     fun updateActiveEvent(
