@@ -27,7 +27,10 @@ data class Event(
     val optimalStepNumber: Int,
 
     @Column(name = "optimal_travel_time", nullable = false)
-    val optimalTravelTime: Int
+    val optimalTravelTime: Int,
+
+    @Column(name = "is_active", nullable = false)
+    val isActive: Boolean
 )
 
-    //TODO: check if DTO is necessary
+//TODO: check if DTO is necessary

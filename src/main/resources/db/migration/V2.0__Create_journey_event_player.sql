@@ -5,7 +5,8 @@ CREATE TABLE EVENT (
     end_location_id VARCHAR(100) NOT NULL,
     start_time TIMESTAMP NOT NULL,
     optimal_step_number INT NOT NULL,
-    optimal_travel_time INT NOT NULL
+    optimal_travel_time INT NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE PLAYER (

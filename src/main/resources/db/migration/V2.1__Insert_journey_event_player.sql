@@ -1,10 +1,10 @@
 -- Inserting data into the EVENT table
-INSERT INTO EVENT (event_name, start_location_id, end_location_id, start_time, optimal_step_number, optimal_travel_time)
+INSERT INTO EVENT (event_name, start_location_id, end_location_id, start_time, optimal_step_number, optimal_travel_time, is_active)
 VALUES
-    ('Event 1: easy', 'NSR:StopPlace:58366', 'NSR:StopPlace:59977', '2024-06-01 10:00:00', 2, 34020),
-    ('Event 2: middle', 'NSR:StopPlace:22329', 'NSR:StopPlace:9625', '2024-06-01 11:00:00', 6, 57780),
-    ('Event 3: hard', 'NSR:StopPlace:58366', 'NSR:StopPlace:198', '2024-06-01 12:00:00', 7, 123000),
-    ('event4', 'NSR:StopPlace:58366', 'NSR:StopPlace:198', '2024-06-01 12:00:00', 7, 123000);
+    ('Event 1: easy', 'NSR:StopPlace:58366', 'NSR:StopPlace:59977', '2024-06-01 10:00:00', 2, 34020, false),
+    ('Event 2: middle', 'NSR:StopPlace:22329', 'NSR:StopPlace:9625', '2024-06-01 11:00:00', 6, 57780, false),
+    ('Event 3: hard', 'NSR:StopPlace:58366', 'NSR:StopPlace:198', '2024-06-01 12:00:00', 7, 123000, false),
+    ('event4', 'NSR:StopPlace:58366', 'NSR:StopPlace:198', '2024-06-01 12:00:00', 7, 123000, true);
 
 -- Inserting data into the PLAYER table
 INSERT INTO PLAYER (player_name, email, phone_number)
