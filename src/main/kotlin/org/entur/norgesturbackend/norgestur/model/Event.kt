@@ -30,3 +30,4 @@ data class Event(
     val optimalTravelTime: Int
 )
 
+    //TODO: check if DTO is necessary

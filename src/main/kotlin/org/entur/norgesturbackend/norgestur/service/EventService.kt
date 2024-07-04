@@ -10,4 +10,9 @@ class EventService(private val eventRepository: EventRepository) {
     fun getAllEvents(): List<Event> {
         return eventRepository.findAllEvents()
     }
+
+    fun getEventByEventName(eventName: String): Event? {
+        return eventRepository.findEventByEventName(eventName)
+    }
+
 }

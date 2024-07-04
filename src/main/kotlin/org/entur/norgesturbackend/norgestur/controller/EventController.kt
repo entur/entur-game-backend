@@ -11,4 +11,11 @@ class EventController(private val eventService: EventService) {
     fun getAllEvents(): List<Event> {
         return eventService.getAllEvents()
     }
+
+    @GetMapping("/event/{event}")
+    fun getEventByEventName(
+        @PathVariable event: String,
+        ): Event? {
+        return eventService.getEventByEventName(event)
+    }
 }
