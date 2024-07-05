@@ -1,6 +1,6 @@
 CREATE TABLE EVENT (
     event_id serial PRIMARY KEY,
-    event_name VARCHAR(100) NOT NULL,
+    event_name VARCHAR(100) NOT NULL UNIQUE,
     start_location_id VARCHAR(100) NOT NULL,
     end_location_id VARCHAR(100) NOT NULL,
     start_time TIMESTAMP NOT NULL,
