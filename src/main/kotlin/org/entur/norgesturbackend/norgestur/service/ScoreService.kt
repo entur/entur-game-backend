@@ -10,4 +10,8 @@ class ScoreService(private val scoreRepository: ScoreRepository) {
     fun getAllScores(): List<Score> {
         return scoreRepository.findAllScores()
     }
+
+    fun getActiveScores(): List<Score> {
+        return scoreRepository.findScoresByActiveEvent()
+    }
 }
