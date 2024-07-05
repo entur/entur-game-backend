@@ -1,10 +1,13 @@
 package org.entur.norgesturbackend.norgestur.repository
 
+import org.entur.norgesturbackend.norgestur.model.Event
+import org.entur.norgesturbackend.norgestur.model.Player
 import org.entur.norgesturbackend.norgestur.model.Score
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
+import org.springframework.http.HttpStatus
 
-interface ScoreRepository : JpaRepository<Score, Int> {
+interface ScoreRepository : JpaRepository<Score, Long> {
 
     @Query(
         nativeQuery = true,
@@ -22,4 +25,16 @@ interface ScoreRepository : JpaRepository<Score, Int> {
             """
     )
     fun findScoresByActiveEvent(): List<Score>
+
+    @Query(
+        nativeQuery = true,
+        value = """
+            SELECT score.* FROM score 
+            JOIN event ON event.event_id = score.event_id 
+            WHERE event.is_active = true AND event.event_id = (:eventId)
+            """
+    )
+    fun findScoresByActiveEventAndEventId(eventId: Long): Score?
+
+    fun findByEventAndPlayer(event: Event, player: Player): Score?
 }
