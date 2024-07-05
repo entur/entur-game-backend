@@ -11,4 +11,9 @@ class ScoreController(private val scoreService: ScoreService) {
     fun getAllScores(): List<Score> {
         return scoreService.getAllScores()
     }
+
+    @GetMapping("/score/active")
+    fun getActiveScores(): List<Score> {
+        return scoreService.getActiveScores()
+    }
 }
