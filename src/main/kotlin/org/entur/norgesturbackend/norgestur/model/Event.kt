@@ -32,5 +32,3 @@ data class Event(
     @Column(name = "is_active", nullable = false)
     val isActive: Boolean
 )
-
-//TODO: check if DTO is necessary
