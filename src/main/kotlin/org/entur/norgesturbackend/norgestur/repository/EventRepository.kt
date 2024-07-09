@@ -26,6 +26,6 @@ interface EventRepository : JpaRepository<Event, Int> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE Event e SET e.isActive=false")
+    @Query("UPDATE Event event SET event.isActive=false")
     fun deactivateAllEvents()
 }
