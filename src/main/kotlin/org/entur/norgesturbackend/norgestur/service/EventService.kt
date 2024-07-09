@@ -13,7 +13,7 @@ class EventService(private val eventRepository: EventRepository) {
     }
 
     @Transactional
-    fun saveEvent(event: Event): Event {
+    fun addEvent(event: Event): Event {
         eventRepository.deactivateAllEvents()
         return eventRepository.save(event)
     }
