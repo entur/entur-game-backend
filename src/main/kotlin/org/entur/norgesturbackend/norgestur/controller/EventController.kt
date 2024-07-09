@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*
 import org.entur.norgesturbackend.norgestur.service.EventService
 import org.entur.norgesturbackend.norgestur.service.MultipleActiveEventsException
 import org.springframework.http.ResponseEntity
+import org.springframework.http.HttpStatus
 
 @RestController
 class EventController(private val eventService: EventService) {
@@ -21,7 +22,6 @@ class EventController(private val eventService: EventService) {
         return eventService.getEventByEventName(event)
     }
 
-
     @GetMapping("/event/active")
     fun getActiveEvent(): ResponseEntity<Any> {
         return try {
@@ -32,5 +32,11 @@ class EventController(private val eventService: EventService) {
         } catch (e: MultipleActiveEventsException) {
             ResponseEntity.status(409).body(mapOf("status" to 409, "error" to "Conflict", "message" to e.message))
         }
+    }
+
+    @PostMapping("/new-event")
+    fun createEvent(@RequestBody event: Event): ResponseEntity<Event> {
+        val savedEvent = eventService.addEvent(event)
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedEvent)
     }
 }
