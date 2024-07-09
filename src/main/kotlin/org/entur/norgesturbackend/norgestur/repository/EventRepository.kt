@@ -4,6 +4,8 @@ import org.entur.norgesturbackend.norgestur.model.Event
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.query.Param
+import org.springframework.data.jpa.repository.Modifying
+import org.springframework.transaction.annotation.Transactional
 
 interface EventRepository : JpaRepository<Event, Int> {
 
@@ -20,4 +22,10 @@ interface EventRepository : JpaRepository<Event, Int> {
     fun findEventByEventName(
         @Param("eventName") eventName: String
     ): Event?
+
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Event event SET event.isActive=false")
+    fun deactivateAllEvents()
 }
