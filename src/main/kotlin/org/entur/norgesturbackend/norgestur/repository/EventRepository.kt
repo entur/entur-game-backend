@@ -20,4 +20,10 @@ interface EventRepository : JpaRepository<Event, Int> {
     fun findEventByEventName(
         @Param("eventName") eventName: String
     ): Event?
+
+    @Query(
+        nativeQuery = true,
+        value = "SELECT * FROM event WHERE is_active = true"
+    )
+    fun findEventsByIsActiveTrue(): List<Event>
 }
