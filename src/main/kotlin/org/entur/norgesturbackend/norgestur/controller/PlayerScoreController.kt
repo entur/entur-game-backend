@@ -24,11 +24,6 @@ class PlayerScoreController (val playerScoreService: PlayerScoreService){
             return playerScoreService.getScoreByDifficultyAndSize(difficulty , size).map { it.toResponse() }
     }
 
-    @GetMapping("/player-score/top-ten-overall")
-    fun getPlayerScore(): List<PlayerScoreDto> {
-        return playerScoreService.getTopTen().map { it.toResponse() }
-    }
-
     @PostMapping("/player-score")
     fun addPlayerScore(
             @RequestBody playerScore: PlayerScore,

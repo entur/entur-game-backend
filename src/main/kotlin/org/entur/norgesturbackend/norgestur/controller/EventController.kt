@@ -19,4 +19,11 @@ class EventController(private val eventService: EventService) {
         val savedEvent = eventService.saveEvent(event)
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEvent)
     }
+
+    @GetMapping("/event/{event}")
+    fun getEventByEventName(
+        @PathVariable event: String,
+        ): Event? {
+        return eventService.getEventByEventName(event)
+    }
 }

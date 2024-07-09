@@ -18,4 +18,9 @@ class EventService(private val eventRepository: EventRepository) {
         return eventRepository.save(event)
     }
 
+
+    fun getEventByEventName(eventName: String): Event? {
+        return eventRepository.findEventByEventName(eventName)
+    }
+
 }
