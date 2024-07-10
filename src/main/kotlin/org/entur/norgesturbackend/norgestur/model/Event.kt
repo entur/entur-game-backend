@@ -21,14 +21,22 @@ data class Event(
     val endLocationId: String,
 
     @Column(name = "start_time", nullable = false)
-    val startTime: LocalDateTime,
+    var startTime: LocalDateTime,
 
     @Column(name = "optimal_step_number", nullable = false)
-    val optimalStepNumber: Int,
+    var optimalStepNumber: Int,
 
     @Column(name = "optimal_travel_time", nullable = false)
-    val optimalTravelTime: Int,
+    var optimalTravelTime: Int,
 
     @Column(name = "is_active", nullable = false)
-    val isActive: Boolean
-)
+    var isActive: Boolean = true
+
+) {
+    fun updateWith(event: Event) {
+        this.startTime = event.startTime
+        this.optimalStepNumber = event.optimalStepNumber
+        this.optimalTravelTime = event.optimalTravelTime
+        this.isActive = true
+    }
+}

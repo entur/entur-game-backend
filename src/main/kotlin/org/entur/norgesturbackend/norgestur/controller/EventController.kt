@@ -35,8 +35,8 @@ class EventController(private val eventService: EventService) {
     }
 
     @PostMapping("/new-event")
-    fun createEvent(@RequestBody event: Event): ResponseEntity<Event> {
-        val savedEvent = eventService.addEvent(event)
+    fun createOrUpdateEvent(@RequestBody event: Event): ResponseEntity<Event> {
+        val savedEvent = eventService.addOrUpdateEvent(event)
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEvent)
     }
 
