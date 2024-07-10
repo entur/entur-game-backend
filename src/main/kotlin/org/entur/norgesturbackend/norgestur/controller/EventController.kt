@@ -39,4 +39,11 @@ class EventController(private val eventService: EventService) {
         val savedEvent = eventService.addEvent(event)
         return ResponseEntity.status(HttpStatus.CREATED).body(savedEvent)
     }
+
+    @PutMapping("/event/active/{eventId}")
+    fun updateActiveEvent(
+        @PathVariable eventId: Long,
+    ): HttpStatus {
+        return eventService.updateActiveEvent(eventId)
+    }
 }
