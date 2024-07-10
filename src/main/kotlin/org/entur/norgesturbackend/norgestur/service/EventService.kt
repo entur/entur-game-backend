@@ -25,11 +25,16 @@ class EventService(private val eventRepository: EventRepository) {
     }
 
     @Transactional
-    fun addEvent(event: Event): Event {
+    fun addOrUpdateEvent(event: Event): Event {
         eventRepository.deactivateAllEvents()
-        return eventRepository.save(event)
+        val existingEvent = eventRepository.findEventByEventName(event.eventName)
+        return if (existingEvent != null) {
+            existingEvent.updateWith(event)
+            eventRepository.save(existingEvent)
+        } else {
+            eventRepository.save(event)
+        }
     }
-
 }
 
-class MultipleActiveEventsException(message: String) : RuntimeException(message)
+    class MultipleActiveEventsException(message: String) : RuntimeException(message)
