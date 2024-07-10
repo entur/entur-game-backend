@@ -2,6 +2,7 @@ package org.entur.norgesturbackend.norgestur.service
 
 import org.entur.norgesturbackend.norgestur.model.Event
 import org.entur.norgesturbackend.norgestur.repository.EventRepository
+import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -34,6 +35,13 @@ class EventService(private val eventRepository: EventRepository) {
         } else {
             eventRepository.save(event)
         }
+    }
+
+    @Transactional
+    fun updateActiveEvent(eventId: Long): HttpStatus {
+        eventRepository.deactivateAllEvents()
+        eventRepository.activateEvent(eventId)
+        return HttpStatus.OK
     }
 }
 
