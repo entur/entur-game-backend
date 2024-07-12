@@ -19,12 +19,6 @@ class ScoreController(private val scoreService: ScoreService) {
         return scoreService.getActiveScores()
     }
 
-    //TODO: fiks stygg feilmelding dersom event ikke eksisterer eller player eksisterer med med annet email og/eller tlf.nummer
-    //TODO: eksisterende event/player med nye score verdier -> suksess dvs. oppdateres
-    //TODO: ny event/player kombo -> suksess dvs. ny event/player kombo legges til
-    //TODO: dersom event ikke eksisterer-> stygg feilmelding (ønske: feilmelding med error kode)
-    //TODO: dersom player ikke eksisterer-> suksess dvs. ønske: legg til player og så legg til score)
-    //TODO: dersom playerNavn eksisterer men med annen email og/eller tlf. nummer -> oppfører seg som om det var punkt 2. (ønske: feilmelding)
     @PostMapping("/score/save")
     fun saveScore(
         @RequestBody score: Score,
