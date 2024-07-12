@@ -3,6 +3,7 @@ package org.entur.norgesturbackend.norgestur.repository
 import org.entur.norgesturbackend.norgestur.model.Player
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
+import org.springframework.data.repository.query.Param
 
 interface PlayerRepository : JpaRepository<Player, Int> {
 
@@ -11,4 +12,12 @@ interface PlayerRepository : JpaRepository<Player, Int> {
         value = "SELECT * FROM player"
     )
     fun findAllPlayers(): List<Player>
+
+    @Query(
+        nativeQuery = true,
+        value = "SELECT * FROM player WHERE player_name = (:playerName)"
+    )
+    fun findPlayerByPlayerName(
+        @Param("playerName") playerName: String
+    ): Player?
 }
