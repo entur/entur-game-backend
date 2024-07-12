@@ -9,26 +9,26 @@ VALUES
 -- Inserting data into the PLAYER table
 INSERT INTO PLAYER (player_name, email, phone_number)
 VALUES
-    ('Player1', 'player1@example.com', '12345678'),
-    ('Player2', 'player2@example.com', '12345679'),
-    ('Player3', 'player3@example.com', '12345680'),
-    ('Player4', 'player4@example.com', '12345681'),
-    ('Player5', 'player5@example.com', '12345682'),
-    ('Player6', 'player6@example.com', '12345683'),
-    ('Player7', 'player7@example.com', '12345684'),
-    ('Player8', 'player8@example.com', '12345685'),
-    ('Player9', 'player9@example.com', '12345686'),
-    ('Player10', 'player10@example.com', '12345687'),
-    ('Player11', 'player11@example.com', '12345688'),
-    ('Player12', 'player12@example.com', '12345689'),
-    ('Player13', 'player13@example.com', '12345690'),
-    ('Player14', 'player14@example.com', '12345691'),
-    ('Player15', 'player15@example.com', '12345692'),
-    ('Player16', 'player16@example.com', '12345693'),
-    ('Player17', 'player17@example.com', '12345694'),
-    ('Player18', 'player18@example.com', '12345695'),
-    ('Player19', 'player19@example.com', '12345696'),
-    ('Player20', 'player20@example.com', '12345697');
+    ('Player1', 'player1@example.com', '10000001'),
+    ('Player2', 'player2@example.com', '10000002'),
+    ('Player3', 'player3@example.com', '10000003'),
+    ('Player4', 'player4@example.com', '10000004'),
+    ('Player5', 'player5@example.com', '10000005'),
+    ('Player6', 'player6@example.com', '10000006'),
+    ('Player7', 'player7@example.com', '10000007'),
+    ('Player8', 'player8@example.com', '10000008'),
+    ('Player9', 'player9@example.com', '10000009'),
+    ('Player10', 'player10@example.com', '10000010'),
+    ('Player11', 'player11@example.com', '10000011'),
+    ('Player12', 'player12@example.com', '10000012'),
+    ('Player13', 'player13@example.com', '10000013'),
+    ('Player14', 'player14@example.com', '10000014'),
+    ('Player15', 'player15@example.com', '10000015'),
+    ('Player16', 'player16@example.com', '10000016'),
+    ('Player17', 'player17@example.com', '10000017'),
+    ('Player18', 'player18@example.com', '10000018'),
+    ('Player19', 'player19@example.com', '10000019'),
+    ('Player20', 'player20@example.com', '10000020');
 
 -- Inserting data into the SCORE table
 -- Ensure event_id and player_id refer to existing records in EVENT and PLAYER tables

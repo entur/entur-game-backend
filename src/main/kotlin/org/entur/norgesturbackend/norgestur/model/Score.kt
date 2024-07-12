@@ -3,7 +3,7 @@ package org.entur.norgesturbackend.norgestur.model
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "SCORE")
+@Table(name = "SCORE", uniqueConstraints = [UniqueConstraint(columnNames = ["event_id", "player_id"])])
 data class Score(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
