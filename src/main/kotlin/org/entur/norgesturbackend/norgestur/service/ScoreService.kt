@@ -22,15 +22,6 @@ class ScoreService(
         return scoreRepository.findScoresByActiveEvent()
     }
 
-    //TODO: eksisterende event/player med nye score verdier -> suksess dvs. oppdateres
-    //TODO: dersom score er lavere enn forige: suksess dvs. feilmelding
-    //TODO: ny event/player kombo -> suksess dvs. ny event/player kombo legges til
-    //TODO: dersom event ikke eksisterer -> suksess dvs. feilmelding
-    //TODO: dersom player ikke eksisterer-> suksess dvs. legg til player og så legg til score)
-    //TODO: dersom playerNavn eksisterer men med annen email og/eller tlf. nummer -> suksess dvs. feilmelding
-    //TODO: dersom playerNavn ikke eksisterer men emailen og/eller tlf. nummer gjør det -> suksess dvs. legg til ny spiller og så legg til score
-    //TODO: dersom man kun bytter eventId, fra eksisterende event/player kombo til en som ikke finnes: suksess dvs. nytt score med ny event/player oppretters
-
     fun saveScore(score: Score): ResponseEntity<Any> {
         val event = eventRepository.findById(score.event.eventId.toInt())
         if (!event.isPresent) {

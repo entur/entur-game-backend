@@ -12,8 +12,8 @@ CREATE TABLE EVENT (
 CREATE TABLE PLAYER (
     player_id serial PRIMARY KEY,
     player_name VARCHAR(30) NOT NULL UNIQUE,
-    email VARCHAR(255) NOT NULL, -- email/phone number not longer unique, so that a person that has forgot his last username still is able to play with new username
-    phone_number VARCHAR(16) NOT NULL -- varchar because of leading zeroes and plus sign
+    email VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(16) NOT NULL
 );
 
 CREATE TABLE SCORE (
