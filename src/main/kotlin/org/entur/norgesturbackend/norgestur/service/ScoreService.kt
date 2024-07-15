@@ -1,5 +1,6 @@
 package org.entur.norgesturbackend.norgestur.service
 
+import org.entur.norgesturbackend.norgestur.model.Player
 import org.entur.norgesturbackend.norgestur.model.Score
 import org.entur.norgesturbackend.norgestur.repository.EventRepository
 import org.entur.norgesturbackend.norgestur.repository.ScoreRepository
@@ -27,10 +28,13 @@ class ScoreService(
         if (!event.isPresent) {
             return ResponseEntity.status(404).body(mapOf("status" to 404, "error" to "Not Found", "message" to "Event not found"))
         }
-        val player = playerService.addPlayer(score.player)
-        if (player === null) {
-            return ResponseEntity.status(400).body(mapOf("status" to 400, "error" to "Bad Request", "message" to "Player with same name but different email and/or phone number already exists"))
+
+        val playerResponse = playerService.addPlayer(score.player)
+        if (!playerResponse.statusCode.is2xxSuccessful) {
+            return playerResponse
         }
+        val player = playerResponse.body as Player
+
         val newScore = score.copy(player = score.player.copy(playerId = player.playerId))
         val existingScore = scoreRepository.findByEventAndPlayer(score.event, newScore.player)
         if (existingScore != null) {
