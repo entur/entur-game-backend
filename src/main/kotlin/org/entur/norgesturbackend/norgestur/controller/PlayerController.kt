@@ -11,5 +11,4 @@ class PlayerController(private val playerService: PlayerService) {
     fun getAllPlayers(): List<Player> {
         return playerService.getAllPlayers()
     }
-
 }
