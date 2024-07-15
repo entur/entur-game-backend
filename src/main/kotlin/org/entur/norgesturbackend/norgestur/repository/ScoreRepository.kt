@@ -1,5 +1,7 @@
 package org.entur.norgesturbackend.norgestur.repository
 
+import org.entur.norgesturbackend.norgestur.model.Event
+import org.entur.norgesturbackend.norgestur.model.Player
 import org.entur.norgesturbackend.norgestur.model.Score
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
@@ -22,4 +24,6 @@ interface ScoreRepository : JpaRepository<Score, Int> {
             """
     )
     fun findScoresByActiveEvent(): List<Score>
+
+    fun findByEventAndPlayer(event: Event, player: Player): Score?
 }

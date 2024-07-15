@@ -12,8 +12,8 @@ CREATE TABLE EVENT (
 CREATE TABLE PLAYER (
     player_id serial PRIMARY KEY,
     player_name VARCHAR(30) NOT NULL UNIQUE,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    phone_number VARCHAR(16) NOT NULL UNIQUE -- varchar because of leading zeroes and plus sign
+    email VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(16) NOT NULL
 );
 
 CREATE TABLE SCORE (
@@ -25,5 +25,6 @@ CREATE TABLE SCORE (
     event_id INT NOT NULL,
     player_id INT NOT NULL,
     FOREIGN KEY (event_id) REFERENCES EVENT(event_id),
-    FOREIGN KEY (player_id) REFERENCES PLAYER(player_id)
+    FOREIGN KEY (player_id) REFERENCES PLAYER(player_id),
+    CONSTRAINT unique_event_player UNIQUE (event_id, player_id) -- Ensure combination of event_id and player_id is unique
 );

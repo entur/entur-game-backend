@@ -15,11 +15,14 @@ class EventController(private val eventService: EventService) {
         return eventService.getAllEvents()
     }
 
-    @GetMapping("/event/{event}")
-    fun getEventByEventName(
-        @PathVariable event: String,
-        ): Event? {
-        return eventService.getEventByEventName(event)
+    @GetMapping("/event/{eventName}")
+    fun getEventByEventName(@PathVariable eventName: String): ResponseEntity<Any> {
+        val event = eventService.getEventByEventName(eventName)
+        return if (event != null) {
+            ResponseEntity.ok(event)
+        } else {
+            ResponseEntity.status(404).body(mapOf("status" to 404, "error" to "Not Found", "message" to "Event not found"))
+        }
     }
 
     @GetMapping("/event/active")
