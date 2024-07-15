@@ -3,7 +3,6 @@ package org.entur.norgesturbackend.norgestur.controller
 import org.entur.norgesturbackend.norgestur.model.Score
 import org.springframework.web.bind.annotation.*
 import org.entur.norgesturbackend.norgestur.service.ScoreService
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 
 @RestController
@@ -25,7 +24,4 @@ class ScoreController(private val scoreService: ScoreService) {
     ): ResponseEntity<Any> {
         return scoreService.saveScore(score)
     }
-
-
-
 }
