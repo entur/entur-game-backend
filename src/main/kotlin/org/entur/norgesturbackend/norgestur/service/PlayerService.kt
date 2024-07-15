@@ -20,7 +20,7 @@ class PlayerService(private val playerRepository: PlayerRepository) {
             if (existingPlayer.email == player.email && existingPlayer.phoneNumber == player.phoneNumber) {
                 ResponseEntity.ok(existingPlayer)
             } else {
-                ResponseEntity.status(400).body(mapOf("status" to 400, "error" to "Bad Request", "message" to "Player with same name but different email and/or phone number already exists"))
+                ResponseEntity.status(409).body(mapOf("status" to 409, "error" to "Conflict", "message" to "Player with same name but different email and/or phone number already exists"))
             }
         } else {
             val savedPlayer = playerRepository.save(player)
