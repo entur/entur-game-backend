@@ -13,10 +13,6 @@ class PlayerService(private val playerRepository: PlayerRepository) {
         return playerRepository.findAllPlayers()
     }
 
-    fun getPlayerByPlayerName(playerName: String): Player? {
-        return playerRepository.findPlayerByPlayerName(playerName)
-    }
-
     @Transactional
     fun addPlayer(player: Player): ResponseEntity<Any> {
         val existingPlayer = playerRepository.findPlayerByPlayerName(player.playerName)
