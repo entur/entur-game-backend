@@ -42,7 +42,7 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 tasks.bootJar {
-	archiveFileName.set("app.jar")
+	archiveFileName.set("entur-game-backend.jar")
 }
 
 tasks.getByName<Jar>("jar") {
