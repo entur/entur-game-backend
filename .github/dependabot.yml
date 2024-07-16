@@ -62,7 +62,7 @@ updates:
     interval: "weekly"
     day: "monday"
 - package-ecosystem: "docker"
-  directory: "/helm/agreements-backend"
+  directory: "/helm/entur-game-backend"
   groups:
     major:
       applies-to: version-updates
