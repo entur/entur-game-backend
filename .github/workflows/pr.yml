@@ -1,0 +1,62 @@
+name: PR
+on:
+  pull_request:
+
+jobs:
+  docker-lint:
+    uses: entur/gha-docker/.github/workflows/lint.yml@v1
+
+  helm-lint-agreements-backend:
+    uses: entur/gha-helm/.github/workflows/lint.yml@v1
+    with:
+      environment: dev
+      chart: helm/agreements-backend
+
+  terraform-lint:
+    uses: entur/gha-terraform/.github/workflows/lint.yml@v1
+
+  # follow this link to for more info: https://github.com/gradle/actions/blob/main/docs/setup-gradle.md
+  gradle-build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: 17
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+        with:
+          gradle-version: 8.7
+      - name: Build with Gradle
+        run: ./gradlew --no-daemon clean build
+        env:
+          ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
+          ARTIFACTORY_APIKEY: ${{ secrets.ARTIFACTORY_APIKEY }}
+#      - name: Run Tests
+#        run: ./gradlew ${{ inputs.test-command }} test jacocoTestReport
+#        env:
+#          ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
+#          ARTIFACTORY_APIKEY: ${{ secrets.ARTIFACTORY_APIKEY }}
+
+  push-documents:
+    needs: gradle-build
+    uses:
+      entur/gha-docs/.github/workflows/ci.yml@v1
+
+      #- name: Archive Test Reports
+      #  uses: actions/upload-artifact@v4
+      #  with:
+      #    name: test-reports
+      #    path: build/reports/tests/test
+      #    script: |
+      #      github.rest.issues.createComment({
+      #        issue_number: context.issue.number,
+      #        owner: context.repo.owner,
+      #        repo: context.repo.repo,
+      #        body: '👋 Thanks for reporting!'
+      #      })
