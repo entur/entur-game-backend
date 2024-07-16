@@ -37,26 +37,8 @@ jobs:
         env:
           ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
           ARTIFACTORY_APIKEY: ${{ secrets.ARTIFACTORY_APIKEY }}
-#      - name: Run Tests
-#        run: ./gradlew ${{ inputs.test-command }} test jacocoTestReport
-#        env:
-#          ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
-#          ARTIFACTORY_APIKEY: ${{ secrets.ARTIFACTORY_APIKEY }}
 
-  push-documents:
-    needs: gradle-build
-    uses:
-      entur/gha-docs/.github/workflows/ci.yml@v1
-
-      #- name: Archive Test Reports
-      #  uses: actions/upload-artifact@v4
-      #  with:
-      #    name: test-reports
-      #    path: build/reports/tests/test
-      #    script: |
-      #      github.rest.issues.createComment({
-      #        issue_number: context.issue.number,
-      #        owner: context.repo.owner,
-      #        repo: context.repo.repo,
-      #        body: '👋 Thanks for reporting!'
-      #      })
+#  push-documents:
+#    needs: gradle-build
+#    uses:
+#      entur/gha-docs/.github/workflows/ci.yml@v1
