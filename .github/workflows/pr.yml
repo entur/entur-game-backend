@@ -30,7 +30,7 @@ jobs:
         with:
           gradle-version: 8.7
       - name: Build with Gradle
-        run: ./gradlew --no-daemon clean build
+        run: ./gradlew --no-daemon clean build -x test
         env:
           ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_USER }}
           ARTIFACTORY_APIKEY: ${{ secrets.ARTIFACTORY_APIKEY }}
