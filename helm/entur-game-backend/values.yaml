@@ -20,10 +20,6 @@ common:
     cpu: 0.1
     cpuLimit: 1.0
     memory: 64
-#  secrets:
-#    auth0-credentials:
-#      - MNG_AUTH0_INT_CLIENT_SECRET
-#      - MNG_AUTH0_INT_CLIENT_ID
   configmap:
     enabled: true
     toEnv: true
