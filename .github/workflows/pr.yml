@@ -12,9 +12,6 @@ jobs:
       environment: dev
       chart: helm/entur-game-backend
 
-  terraform-lint:
-    uses: entur/gha-terraform/.github/workflows/lint.yml@v1
-
   # follow this link to for more info: https://github.com/gradle/actions/blob/main/docs/setup-gradle.md
   gradle-build:
     runs-on: ubuntu-latest
