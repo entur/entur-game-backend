@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*
 import org.entur.norgesturbackend.norgestur.service.EventService
 import org.springframework.http.ResponseEntity
 import org.springframework.http.HttpStatus
-import org.springframework.web.bind.annotation.DeleteMapping
 
 @RestController
 class EventController(private val eventService: EventService) {
