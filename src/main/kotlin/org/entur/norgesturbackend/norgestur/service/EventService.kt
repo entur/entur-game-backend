@@ -25,6 +25,11 @@ class EventService(private val eventRepository: EventRepository) {
         return activeEvents.firstOrNull() ?: throw NoSuchElementException("No active event found.")
     }
 
+    fun getInactiveEvent(): List<Event> {
+        return eventRepository.findEventsByIsActiveFalse()
+
+    }
+
     @Transactional
     fun addOrUpdateEvent(event: Event): Event {
         eventRepository.deactivateAllEvents()
@@ -43,6 +48,7 @@ class EventService(private val eventRepository: EventRepository) {
         eventRepository.activateEvent(eventId)
         return HttpStatus.OK
     }
-}
+
 
     class MultipleActiveEventsException(message: String) : RuntimeException(message)
+}
