@@ -16,7 +16,7 @@ common:
       TZx: "Europe/Oslo"
       permission_url: "http://permission-store.dev.entur.internal"
       entur.auth.external.resource: "file:/config/dev/providers.properties"
-      db_url: jdbc:postgresql://localhost:5432/dev_game-backend
+      DATABASE_URL: jdbc:postgresql://localhost:5432/dev_game-backend
       oauth_client_domain: internal.dev.entur.org
       oauth_client_audiences: https://api.dev.entur.io
   postgres:

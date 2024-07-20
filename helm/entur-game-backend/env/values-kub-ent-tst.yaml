@@ -16,7 +16,7 @@ common:
       TZx: "Europe/Oslo"
       permission_url: "http://permission-store.tst.entur.internal"
       entur.auth.external.resource: "file:/config/staging/providers.properties"
-      db_url: jdbc:postgresql://localhost:5432/tst_game-backend
+      DATABASE_URL: jdbc:postgresql://localhost:5432/tst_game-backend
       oauth_client_domain: internal.staging.entur.org
       oauth_client_audiences: https://api.staging.entur.io
   postgres:
