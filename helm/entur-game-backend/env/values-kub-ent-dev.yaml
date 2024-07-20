@@ -12,7 +12,7 @@ common:
     enabled: true
     toEnv: true
     data:
-      env_name: development
+      ENVIRONMENT: development
       TZx: "Europe/Oslo"
       permission_url: "http://permission-store.dev.entur.internal"
       entur.auth.external.resource: "file:/config/dev/providers.properties"

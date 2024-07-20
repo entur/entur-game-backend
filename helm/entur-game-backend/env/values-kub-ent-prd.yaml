@@ -12,7 +12,7 @@ common:
     enabled: true
     toEnv: true
     data:
-      env_name: production
+      ENVIRONMENT: production
       TZx: "Europe/Oslo"
       permission_url: "http://permission-store.prd.entur.internal"
       entur.auth.external.resource: "file:/config/production/providers.properties"
