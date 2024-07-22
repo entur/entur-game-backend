@@ -23,6 +23,10 @@ class ScoreService(
         return scoreRepository.findScoresByActiveEvent()
     }
 
+    fun getScoresByEventId(eventId: Long): List<Score> {
+        return scoreRepository.findByEventId(eventId)
+    }
+
     fun saveScore(score: Score): ResponseEntity<Any> {
         val event = eventRepository.findById(score.event.eventId.toInt())
         if (!event.isPresent) {

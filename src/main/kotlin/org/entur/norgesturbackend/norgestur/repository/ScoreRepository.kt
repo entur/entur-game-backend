@@ -5,13 +5,12 @@ import org.entur.norgesturbackend.norgestur.model.Player
 import org.entur.norgesturbackend.norgestur.model.Score
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
+import org.springframework.data.repository.query.Param
 
-interface ScoreRepository : JpaRepository<Score, Int> {
 
-    @Query(
-        nativeQuery = true,
-        value = "SELECT * FROM score"
-    )
+interface ScoreRepository : JpaRepository<Score, Long> {
+
+    @Query(nativeQuery = true, value = "SELECT * FROM score")
     fun findAllScores(): List<Score>
 
     @Query(
@@ -26,4 +25,7 @@ interface ScoreRepository : JpaRepository<Score, Int> {
     fun findScoresByActiveEvent(): List<Score>
 
     fun findByEventAndPlayer(event: Event, player: Player): Score?
+
+    @Query("SELECT s FROM Score s JOIN s.event e WHERE e.eventId = :eventId")
+    fun findByEventId(@Param("eventId") eventId: Long): List<Score>
 }

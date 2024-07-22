@@ -15,10 +15,6 @@ interface EventRepository : JpaRepository<Event, Int> {
     )
     fun findAllEvents(): List<Event>
 
-    @Query(
-        nativeQuery = true,
-        value = "DELETE event = (:id) FROM event"
-    )
 
     fun findEventByEventName(
         @Param("eventName") eventName: String

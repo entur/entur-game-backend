@@ -30,4 +30,6 @@ class PlayerScoreController (val playerScoreService: PlayerScoreService){
     ): HttpStatus{
         return playerScoreService.savePlayerScore(playerScore)
     }
+
+
 }
