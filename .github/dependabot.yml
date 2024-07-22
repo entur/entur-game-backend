@@ -1,0 +1,81 @@
+version: 2
+registries:
+  jfrog-artifactory:
+    type: npm-registry
+    url: "https://entur2.jfrog.io/entur2"
+    token: ${{secrets.ARTIFACTORY_AUTH_TOKEN}}
+updates:
+- package-ecosystem: "docker"
+  directory: "/"
+  groups:
+    major:
+      applies-to: version-updates
+      update-types:
+      - "major"
+    minor:
+      applies-to: version-updates
+      update-types:
+      - "minor"
+    patch:
+      applies-to: version-updates
+      update-types:
+      - "patch"
+  schedule:
+    interval: "weekly"
+    day: "monday"
+- package-ecosystem: "gradle"
+  directory: "/"
+  registries:
+    - jfrog-artifactory
+  groups:
+    major:
+      applies-to: version-updates
+      update-types:
+      - "major"
+    minor:
+      applies-to: version-updates
+      update-types:
+      - "minor"
+    patch:
+      applies-to: version-updates
+      update-types:
+      - "patch"
+  schedule:
+    interval: "weekly"
+    day: "monday"
+- package-ecosystem: "terraform"
+  directory: "/terraform"
+  groups:
+    major:
+      applies-to: version-updates
+      update-types:
+      - "major"
+    minor:
+      applies-to: version-updates
+      update-types:
+      - "minor"
+    patch:
+      applies-to: version-updates
+      update-types:
+      - "patch"
+  schedule:
+    interval: "weekly"
+    day: "monday"
+- package-ecosystem: "docker"
+  directory: "/helm/entur-game-backend"
+  groups:
+    major:
+      applies-to: version-updates
+      update-types:
+      - "major"
+    minor:
+      applies-to: version-updates
+      update-types:
+      - "minor"
+    patch:
+      applies-to: version-updates
+      update-types:
+      - "patch"
+  schedule:
+    interval: "weekly"
+    day: "monday"
