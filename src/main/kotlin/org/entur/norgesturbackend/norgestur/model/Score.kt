@@ -10,23 +10,23 @@ data class Score(
     @Column(name = "score_id")
     val scoreId: Long = 0,
 
-    @Column(name = "score_value", nullable = false)
+    @Column(name = "score_value", nullable = false, unique = false)
     val scoreValue: Int,
 
-    @Column(name = "total_step_number", nullable = false)
+    @Column(name = "total_step_number", nullable = false, unique = false)
     val totalStepNumber: Int,
 
-    @Column(name = "total_travel_time", nullable = false)
+    @Column(name = "total_travel_time", nullable = false, unique = false)
     val totalTravelTime: Int,
 
-    @Column(name = "total_play_time", nullable = false)
+    @Column(name = "total_play_time", nullable = false, unique = false)
     val totalPlayTime: Int,
 
     @ManyToOne
-    @JoinColumn(name = "event_id", nullable = false)
+    @JoinColumn(name = "event_id", nullable = false, unique = false)
     val event: Event,
 
     @ManyToOne
-    @JoinColumn(name = "player_id", nullable = false)
+    @JoinColumn(name = "player_id", nullable = false, unique = false)
     val player: Player
 )

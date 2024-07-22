@@ -28,6 +28,18 @@ class EventService(private val eventRepository: EventRepository) {
     @Transactional
     fun addEvent(event: Event): Event {
         eventRepository.deactivateAllEvents()
+        val existingEvent = eventRepository.findEventByEventName(event.eventName)
+        if (existingEvent != null) {
+            val updatedEvent = existingEvent.copy(
+                startLocationId = event.startLocationId,
+                endLocationId = event.endLocationId,
+                startTime = event.startTime,
+                optimalStepNumber = event.optimalStepNumber,
+                optimalTravelTime = event.optimalTravelTime,
+                isActive = true
+            )
+            return eventRepository.save(updatedEvent)
+        }
         return eventRepository.save(event)
     }
 
