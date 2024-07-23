@@ -27,7 +27,6 @@ class EventService(private val eventRepository: EventRepository) {
 
     fun getInactiveEvent(): List<Event> {
         return eventRepository.findEventsByIsActiveFalse()
-
     }
 
     @Transactional
@@ -47,6 +46,11 @@ class EventService(private val eventRepository: EventRepository) {
         eventRepository.deactivateAllEvents()
         eventRepository.activateEvent(eventId)
         return HttpStatus.OK
+    }
+
+    @Transactional
+    fun getEventByEventId(eventId: Long): Event? {
+        return eventRepository.findEventByEventId(eventId)
     }
 
 
