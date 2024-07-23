@@ -26,4 +26,6 @@ interface ScoreRepository : JpaRepository<Score, Int> {
     fun findScoresByActiveEvent(): List<Score>
 
     fun findByEventAndPlayer(event: Event, player: Player): Score?
+
+    fun deleteByEvent(event: Event)
 }
