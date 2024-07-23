@@ -3,7 +3,6 @@ package org.entur.norgesturbackend.norgestur.controller
 import org.entur.norgesturbackend.norgestur.model.Event
 import org.springframework.web.bind.annotation.*
 import org.entur.norgesturbackend.norgestur.service.EventService
-import org.entur.norgesturbackend.norgestur.service.MultipleActiveEventsException
 import org.springframework.http.ResponseEntity
 import org.springframework.http.HttpStatus
 
@@ -25,6 +24,16 @@ class EventController(private val eventService: EventService) {
         }
     }
 
+    @GetMapping("/event/inactive/{eventId}")
+    fun getEventByEventId(@PathVariable eventId: Long): ResponseEntity<Any> {
+        val eventById = eventService.getEventByEventId(eventId)
+        return if (eventById != null) {
+            ResponseEntity.ok(eventById)
+        } else {
+            ResponseEntity.status(404).body(mapOf("status" to 404, "error" to "Not Found", "message" to "Event not found"))
+        }
+    }
+
     @GetMapping("/event/active")
     fun getActiveEvent(): ResponseEntity<Any> {
         return try {
@@ -32,9 +41,14 @@ class EventController(private val eventService: EventService) {
             ResponseEntity.ok(activeEvent)
         } catch (e: NoSuchElementException) {
             ResponseEntity.status(404).body(mapOf("status" to 404, "error" to "Not Found", "message" to e.message))
-        } catch (e: MultipleActiveEventsException) {
+        } catch (e: EventService.MultipleActiveEventsException) {
             ResponseEntity.status(409).body(mapOf("status" to 409, "error" to "Conflict", "message" to e.message))
         }
+    }
+
+    @GetMapping("/event/inactive")
+    fun getInactiveEvent(): List<Event> {
+        return eventService.getInactiveEvent()
     }
 
     @PostMapping("/new-event")
