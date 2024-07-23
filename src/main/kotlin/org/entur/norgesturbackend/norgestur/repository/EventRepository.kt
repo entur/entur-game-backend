@@ -15,7 +15,10 @@ interface EventRepository : JpaRepository<Event, Long> {
     )
     fun findAllEvents(): List<Event>
 
-
+    @Query(
+        nativeQuery = true,
+        value = "SELECT * FROM event WHERE event_name = (:eventName)"
+    )
     fun findEventByEventName(
         @Param("eventName") eventName: String
     ): Event?
