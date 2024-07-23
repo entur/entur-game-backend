@@ -49,4 +49,16 @@ class EventController(private val eventService: EventService) {
     ): HttpStatus {
         return eventService.updateActiveEvent(eventId)
     }
+
+    @DeleteMapping("/{eventId}")
+    fun deleteEvent(@PathVariable eventId: Long): ResponseEntity<String> {
+        return try {
+            eventService.deleteEvent(eventId)
+            ResponseEntity("Event deleted successfully", HttpStatus.OK)
+        } catch (e: IllegalArgumentException) {
+            ResponseEntity(e.message, HttpStatus.NOT_FOUND)
+        } catch (e: Exception) {
+            ResponseEntity("An error occurred: ${e.message}", HttpStatus.INTERNAL_SERVER_ERROR)
+        }
+    }
 }

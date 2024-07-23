@@ -2,12 +2,18 @@ package org.entur.norgesturbackend.norgestur.service
 
 import org.entur.norgesturbackend.norgestur.model.Event
 import org.entur.norgesturbackend.norgestur.repository.EventRepository
+import org.entur.norgesturbackend.norgestur.repository.PlayerRepository
+import org.entur.norgesturbackend.norgestur.repository.ScoreRepository
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class EventService(private val eventRepository: EventRepository) {
+class EventService(
+    private val eventRepository: EventRepository,
+    private val scoreRepository: ScoreRepository,
+    private val playerRepository: PlayerRepository
+) {
 
     fun getAllEvents(): List<Event> {
         return eventRepository.findAllEvents()
@@ -48,6 +54,17 @@ class EventService(private val eventRepository: EventRepository) {
         eventRepository.deactivateAllEvents()
         eventRepository.activateEvent(eventId)
         return HttpStatus.OK
+    }
+
+    @Transactional
+    fun deleteEvent(eventId: Long) {
+        val event = eventRepository.findById(eventId).orElseThrow {
+            throw IllegalArgumentException("Event with id $eventId not found")
+        }
+        scoreRepository.deleteByEvent(event)
+        eventRepository.delete(event)
+        val playersWithNoScores = playerRepository.findPlayersWithNoScores()
+        playerRepository.deleteAll(playersWithNoScores)
     }
 }
 
