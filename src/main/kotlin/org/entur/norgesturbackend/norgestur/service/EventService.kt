@@ -59,7 +59,6 @@ class EventService(
         return eventRepository.findEventByEventId(eventId)
     }
 
-
     @Transactional
     fun deleteEvent(eventId: Long) {
         val event = eventRepository.findById(eventId).orElseThrow {
@@ -70,7 +69,6 @@ class EventService(
         val playersWithNoScores = playerRepository.findPlayersWithNoScores()
         playerRepository.deleteAll(playersWithNoScores)
     }
-
 
     class MultipleActiveEventsException(message: String) : RuntimeException(message)
 }

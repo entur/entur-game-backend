@@ -1,7 +1,5 @@
 package org.entur.norgesturbackend.norgestur.controller
 
-import com.sun.java.accessibility.util.EventID
-import org.entur.norgesturbackend.norgestur.model.Event
 import org.entur.norgesturbackend.norgestur.model.Score
 import org.springframework.web.bind.annotation.*
 import org.entur.norgesturbackend.norgestur.service.ScoreService
