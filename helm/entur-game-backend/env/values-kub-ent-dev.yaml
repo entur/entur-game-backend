@@ -1,0 +1,24 @@
+common:
+  env: dev
+  ingress:
+    host:
+      entur-game-backend.dev.entur.io
+  container:
+    cpu: 0.02
+    memory: 640
+    replicas: 2
+    maxReplicas: 2
+  configmap:
+    enabled: true
+    toEnv: true
+    data:
+      ENVIRONMENT: development
+      TZx: "Europe/Oslo"
+      permission_url: "http://permission-store.dev.entur.internal"
+      entur.auth.external.resource: "file:/config/dev/providers.properties"
+      DATABASE_URL: jdbc:postgresql://localhost:5432/dev_game-backend
+      oauth_client_domain: internal.dev.entur.org
+      oauth_client_audiences: https://api.dev.entur.io
+  postgres:
+    cpu: 0.4
+    memory: 32

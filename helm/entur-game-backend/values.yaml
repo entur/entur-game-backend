@@ -1,0 +1,27 @@
+common:
+  app: entur-game-backend
+  shortname: enturbckend
+  team: partner
+  ingress:
+    enabled: true
+    trafficType: public
+  service:
+    internalPort: 8080
+  container:
+    cpuLimit: 1.0
+    image: <+artifacts.primary.image>
+    probes:
+      liveness:
+        path: "/actuator/health"
+      readiness:
+        path: "/actuator/health"
+  postgres:
+    enabled: true
+    cpu: 0.1
+    cpuLimit: 1.0
+    memory: 64
+  configmap:
+    enabled: true
+    toEnv: true
+    data:
+      TZx: "Europe/Oslo"

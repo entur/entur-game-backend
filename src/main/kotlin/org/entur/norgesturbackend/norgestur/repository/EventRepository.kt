@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param
 import org.springframework.data.jpa.repository.Modifying
 import org.springframework.transaction.annotation.Transactional
 
-interface EventRepository : JpaRepository<Event, Int> {
+interface EventRepository : JpaRepository<Event, Long> {
 
     @Query(
         nativeQuery = true,

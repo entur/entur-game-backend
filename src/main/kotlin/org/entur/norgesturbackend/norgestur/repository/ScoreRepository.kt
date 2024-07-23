@@ -28,4 +28,6 @@ interface ScoreRepository : JpaRepository<Score, Long> {
 
     @Query("SELECT s FROM Score s JOIN s.event e WHERE e.eventId = :eventId")
     fun findByEventId(@Param("eventId") eventId: Long): List<Score>
+
+    fun deleteByEvent(event: Event)
 }

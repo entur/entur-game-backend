@@ -28,7 +28,7 @@ class ScoreService(
     }
 
     fun saveScore(score: Score): ResponseEntity<Any> {
-        val event = eventRepository.findById(score.event.eventId.toInt())
+        val event = eventRepository.findById(score.event.eventId)
         if (!event.isPresent) {
             return ResponseEntity.status(404).body(mapOf("status" to 404, "error" to "Not Found", "message" to "Event not found"))
         }
