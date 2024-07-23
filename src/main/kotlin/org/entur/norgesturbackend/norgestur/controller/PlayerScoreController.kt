@@ -8,13 +8,9 @@ import org.entur.norgesturbackend.norgestur.service.PlayerScoreService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import java.util.*
 
 @RestController
 class PlayerScoreController (val playerScoreService: PlayerScoreService){
-
-    @Autowired
-    lateinit var myProperties: MyProperties
 
     @GetMapping("/player-score/{difficulty}")
     fun getPlayerScoreByDifficulty(
@@ -30,6 +26,4 @@ class PlayerScoreController (val playerScoreService: PlayerScoreService){
     ): HttpStatus{
         return playerScoreService.savePlayerScore(playerScore)
     }
-
-
 }
