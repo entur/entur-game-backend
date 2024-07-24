@@ -31,7 +31,7 @@ class EventService(
         return activeEvents.firstOrNull() ?: throw NoSuchElementException("No active event found.")
     }
 
-    fun getInactiveEvent(): List<Event> {
+    fun getInactiveEvents(): List<Event> {
         return eventRepository.findEventsByIsActiveFalse()
     }
 
@@ -68,6 +68,18 @@ class EventService(
         eventRepository.delete(event)
         val playersWithNoScores = playerRepository.findPlayersWithNoScores()
         playerRepository.deleteAll(playersWithNoScores)
+    }
+
+    @Transactional
+    fun endActiveEvent(): String {
+        val activeEvent = eventRepository.findFirstByIsActive(true)
+        return if (activeEvent != null) {
+            activeEvent.isActive = false
+            eventRepository.save(activeEvent)
+            "Event ended successfully."
+        } else {
+            "No active event to end."
+        }
     }
 
     class MultipleActiveEventsException(message: String) : RuntimeException(message)

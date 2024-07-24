@@ -24,14 +24,11 @@ class EventController(private val eventService: EventService) {
         }
     }
 
-    @GetMapping("/event/inactive/{eventId}")
-    fun getEventByEventId(@PathVariable eventId: Long): ResponseEntity<Any> {
-        val eventById = eventService.getEventByEventId(eventId)
-        return if (eventById != null) {
-            ResponseEntity.ok(eventById)
-        } else {
-            ResponseEntity.status(404).body(mapOf("status" to 404, "error" to "Not Found", "message" to "Event not found"))
-        }
+
+    @PostMapping("/end-event")
+    fun endEvent(): ResponseEntity<String> {
+        val message = eventService.endActiveEvent()
+        return ResponseEntity.ok(message)
     }
 
     @GetMapping("/event/active")
@@ -47,8 +44,19 @@ class EventController(private val eventService: EventService) {
     }
 
     @GetMapping("/event/inactive")
-    fun getInactiveEvent(): List<Event> {
-        return eventService.getInactiveEvent()
+    fun getInactiveEvents(): List<Event> {
+        return eventService.getInactiveEvents()
+    }
+
+
+    @GetMapping("/event/{eventId}")
+    fun getEventByEventId(@PathVariable eventId: Long): ResponseEntity<Any> {
+        val eventById = eventService.getEventByEventId(eventId)
+        return if (eventById != null) {
+            ResponseEntity.ok(eventById)
+        } else {
+            ResponseEntity.status(204).body(mapOf("status" to 404, "message" to "Not Found"))
+        }
     }
 
     @PostMapping("/new-event")

@@ -38,6 +38,9 @@ interface EventRepository : JpaRepository<Event, Long> {
     )
     fun findEventsByIsActiveFalse(): List<Event>
 
+    @Query("SELECT e FROM Event e WHERE e.isActive = true")
+    fun findFirstByIsActive(isActive: Boolean): Event?
+
     @Modifying
     @Transactional
     @Query("UPDATE Event event SET event.isActive=false WHERE event.isActive =true")
