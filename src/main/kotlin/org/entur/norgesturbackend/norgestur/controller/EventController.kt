@@ -48,9 +48,15 @@ class EventController(private val eventService: EventService) {
         return eventService.getInactiveEvents()
     }
 
-    @GetMapping("event/inactive/{eventId}")
-    fun getEventByEventId(@PathVariable eventId: Long): Event? {
-        return eventService.getEventByEventId(eventId)
+
+    @GetMapping("/event/{eventId}")
+    fun getEventByEventId(@PathVariable eventId: Long): ResponseEntity<Any> {
+        val eventById = eventService.getEventByEventId(eventId)
+        return if (eventById != null) {
+            ResponseEntity.ok(eventById)
+        } else {
+            ResponseEntity.status(204).body(mapOf("status" to 404, "message" to "Not Found"))
+        }
     }
 
     @PostMapping("/new-event")
