@@ -24,7 +24,7 @@ class ScoreService(
     }
 
     fun getScoresByEventId(eventId: Long): List<Score> {
-        return scoreRepository.findByEventId(eventId)
+        return scoreRepository.findScoreByEventId(eventId)
     }
 
     fun saveScore(score: Score): ResponseEntity<Any> {
