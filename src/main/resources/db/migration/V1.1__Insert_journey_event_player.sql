@@ -1,14 +1,6 @@
--- Inserting data into the EVENT table
-INSERT INTO EVENT (event_name, start_location_id, end_location_id, start_time, optimal_step_number, optimal_travel_time, is_active)
-VALUES
-    ('event1:easy', 'NSR:StopPlace:58366', 'NSR:StopPlace:59977', '2024-06-01 10:00:00', 2, 34020, false, null),
-    ('event2:middle', 'NSR:StopPlace:22329', 'NSR:StopPlace:9625', '2024-06-01 11:00:00', 6, 57780, false, null),
-    ('event3:hard', 'NSR:StopPlace:58366', 'NSR:StopPlace:198', '2024-06-01 12:00:00', 7, 123000, false, null),
-    ('event4', 'NSR:StopPlace:58366', 'NSR:StopPlace:198', '2024-06-01 12:00:00', 7, 123000, true, null);
-
 -- Inserting data into the PLAYER table
 INSERT INTO PLAYER (player_name, email, phone_number)
-VALUESs
+VALUES
     ('Player1', 'player1@example.com', '10000001'),
     ('Player2', 'player2@example.com', '10000002'),
     ('Player3', 'player3@example.com', '10000003'),
@@ -29,6 +21,14 @@ VALUESs
     ('Player18', 'player18@example.com', '10000018'),
     ('Player19', 'player19@example.com', '10000019'),
     ('Player20', 'player20@example.com', '10000020');
+
+-- Inserting data into the EVENT table
+INSERT INTO EVENT (event_name, start_location_id, end_location_id, start_time, optimal_step_number, optimal_travel_time, is_active)
+VALUES
+    ('event1:easy', 'NSR:StopPlace:58366', 'NSR:StopPlace:59977', '2024-06-01 10:00:00', 2, 34020, false),
+    ('event2:middle', 'NSR:StopPlace:22329', 'NSR:StopPlace:9625', '2024-06-01 11:00:00', 6, 57780, false),
+    ('event3:hard', 'NSR:StopPlace:58366', 'NSR:StopPlace:198', '2024-06-01 12:00:00', 7, 123000, false),
+    ('event4', 'NSR:StopPlace:58366', 'NSR:StopPlace:198', '2024-06-01 12:00:00', 7, 123000, true);
 
 -- Inserting data into the SCORE table
 -- Ensure event_id and player_id refer to existing records in EVENT and PLAYER tables

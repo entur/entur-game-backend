@@ -1,3 +1,10 @@
+CREATE TABLE PLAYER (
+    player_id serial PRIMARY KEY,
+    player_name VARCHAR(30) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(16) NOT NULL
+);
+
 CREATE TABLE EVENT (
    event_id serial PRIMARY KEY,
    event_name VARCHAR(100) NOT NULL UNIQUE,
@@ -7,15 +14,8 @@ CREATE TABLE EVENT (
    optimal_step_number INT NOT NULL,
    optimal_travel_time INT NOT NULL,
    is_active BOOLEAN NOT NULL DEFAULT FALSE,
-   winner_id INT, -- Add winner_id column
-   FOREIGN KEY (winner_id) REFERENCES PLAYER(player_id) -- Define winner_id as a foreign key
-);
-
-CREATE TABLE PLAYER (
-    player_id serial PRIMARY KEY,
-    player_name VARCHAR(30) NOT NULL UNIQUE,
-    email VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(16) NOT NULL
+   winner_id INT,
+   FOREIGN KEY (winner_id) REFERENCES PLAYER(player_id)
 );
 
 CREATE TABLE SCORE (
