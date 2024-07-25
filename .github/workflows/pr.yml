@@ -42,14 +42,3 @@ jobs:
           path: build/libs
           retention-days: 1
           overwrite: true
-
-  docker-build:
-    needs: gradle-build
-    uses: entur/gha-docker/.github/workflows/build.yml@v1
-    with:
-      build_artifact_name: app
-      build_artifact_path: build/libs
-
-  docker-push:
-    needs: docker-build
-    uses: entur/gha-docker/.github/workflows/push.yml@v1
