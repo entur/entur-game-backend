@@ -30,13 +30,18 @@ data class Event(
     var optimalTravelTime: Int,
 
     @Column(name = "is_active", nullable = false)
-    var isActive: Boolean = true
+    var isActive: Boolean = true,
+
+    @ManyToOne
+    @JoinColumn(name = "winner_id", referencedColumnName = "player_id")
+    var winner: Player? = null
 
 ) {
     fun updateWith(event: Event) {
         this.startTime = event.startTime
         this.optimalStepNumber = event.optimalStepNumber
         this.optimalTravelTime = event.optimalTravelTime
-        this.isActive = true
+        this.isActive = event.isActive
+        this.winner = event.winner
     }
 }
