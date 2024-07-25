@@ -49,7 +49,7 @@ class EventController(private val eventService: EventService) {
     }
 
 
-    @GetMapping("/event/{eventId}")
+    @GetMapping("/event/inactive/{eventId}")
     fun getEventByEventId(@PathVariable eventId: Long): ResponseEntity<Any> {
         val eventById = eventService.getEventByEventId(eventId)
         return if (eventById != null) {
