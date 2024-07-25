@@ -14,7 +14,7 @@ class EventController(private val eventService: EventService) {
         return eventService.getAllEvents()
     }
 
-    @GetMapping("/event/{eventName}")
+    @GetMapping("/event/name/{eventName}")
     fun getEventByEventName(@PathVariable eventName: String): ResponseEntity<Any> {
         val event = eventService.getEventByEventName(eventName)
         return if (event != null) {
@@ -49,7 +49,7 @@ class EventController(private val eventService: EventService) {
     }
 
 
-    @GetMapping("/event/{eventId}")
+    @GetMapping("/event/id/{eventId}")
     fun getEventByEventId(@PathVariable eventId: Long): ResponseEntity<Any> {
         val eventById = eventService.getEventByEventId(eventId)
         return if (eventById != null) {
