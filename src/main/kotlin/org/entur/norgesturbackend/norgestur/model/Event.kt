@@ -35,13 +35,4 @@ data class Event(
     @ManyToOne
     @JoinColumn(name = "winner_id", referencedColumnName = "player_id")
     var winner: Player? = null
-
-) {
-    fun updateWith(event: Event) {
-        this.startTime = event.startTime
-        this.optimalStepNumber = event.optimalStepNumber
-        this.optimalTravelTime = event.optimalTravelTime
-        this.isActive = event.isActive
-        this.winner = event.winner
-    }
-}
+)

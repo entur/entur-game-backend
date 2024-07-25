@@ -40,8 +40,8 @@ class EventService(
         eventRepository.deactivateAllEvents()
         val existingEvent = eventRepository.findEventByEventName(event.eventName)
         return if (existingEvent != null) {
-            existingEvent.updateWith(event)
-            eventRepository.save(existingEvent)
+            deleteEvent(existingEvent.eventId)
+            eventRepository.save(event)
         } else {
             eventRepository.save(event)
         }
