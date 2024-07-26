@@ -76,7 +76,7 @@ class EventController(private val eventService: EventService) {
         return eventService.updateActiveEvent(eventId)
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     fun deleteEvent(@PathVariable id: Long): ResponseEntity<String> {
         return try {
             eventService.deleteEvent(id)

@@ -19,9 +19,8 @@ class ScoreController(private val scoreService: ScoreService) {
     }
 
     @GetMapping("/score/event/{eventId}")
-    fun getScoresByEventId(@PathVariable eventId: Long): ResponseEntity<List<Score>> {
-        val scores = scoreService.getScoresByEventId(eventId)
-        return ResponseEntity.ok(scores)
+    fun getScoresByEventId(@PathVariable eventId: Long): List<Score> {
+        return scoreService.getScoresByEventId(eventId)
     }
 
     @PostMapping("/score/save")
