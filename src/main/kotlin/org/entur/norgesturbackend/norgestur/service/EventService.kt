@@ -36,14 +36,14 @@ class EventService(
     }
 
     @Transactional
+    @Throws(EventAlreadyExistsException::class)
     fun addOrUpdateEvent(event: Event): Event {
         eventRepository.deactivateAllEvents()
         val existingEvent = eventRepository.findEventByEventName(event.eventName)
-        return if (existingEvent != null) {
-            existingEvent.updateWith(event)
-            eventRepository.save(existingEvent)
+        if (existingEvent != null) {
+            throw EventAlreadyExistsException("Event with name ${event.eventName} already exists.")
         } else {
-            eventRepository.save(event)
+            return eventRepository.save(event)
         }
     }
 
@@ -82,5 +82,17 @@ class EventService(
         }
     }
 
+    @Throws(IllegalArgumentException::class)
+    fun saveWinner(eventName: String, playerId: Long) {
+        val event = eventRepository.findEventByEventName(eventName)
+            ?: throw IllegalArgumentException("Event not found")
+
+        val winner = playerRepository.findPlayerByPlayerId(playerId)
+            ?: throw IllegalArgumentException("Playerr not found")
+        event.winner = winner
+        eventRepository.save(event)
+    }
+
+    class EventAlreadyExistsException(message: String) : RuntimeException(message)
     class MultipleActiveEventsException(message: String) : RuntimeException(message)
 }

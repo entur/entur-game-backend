@@ -21,6 +21,10 @@ interface PlayerRepository : JpaRepository<Player, Int> {
         @Param("playerName") playerName: String
     ): Player?
 
+    fun findPlayerByPlayerId(
+        @Param("playerId") playerId: Long
+    ): Player?
+
     @Query("SELECT p FROM Player p WHERE p.playerId NOT IN (SELECT DISTINCT s.player.playerId FROM Score s)")
     fun findPlayersWithNoScores(): List<Player>
 }

@@ -1,2 +1,0 @@
-ALTER TABLE game_mode
-ADD active_event BOOLEAN DEFAULT FALSE;
