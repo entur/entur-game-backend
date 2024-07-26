@@ -26,8 +26,8 @@ interface ScoreRepository : JpaRepository<Score, Long> {
 
     fun findByEventAndPlayer(event: Event, player: Player): Score?
 
-    @Query("SELECT s FROM Score s JOIN s.event e WHERE e.eventId = :eventId")
-    fun findByEventId(@Param("eventId") eventId: Long): List<Score>
+    @Query(nativeQuery = true, value = "SELECT * FROM score WHERE event_id = :eventId")
+    fun findScoresByEventId(@Param("eventId") eventId: Long): List<Score>
 
     fun deleteByEvent(event: Event)
 }
