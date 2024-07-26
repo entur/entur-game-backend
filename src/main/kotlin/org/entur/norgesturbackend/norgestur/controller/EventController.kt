@@ -87,4 +87,21 @@ class EventController(private val eventService: EventService) {
             ResponseEntity("An error occurred: ${e.message}", HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
+
+    @PostMapping("/save-winner")
+    fun saveWinner(@RequestBody request: SaveWinnerRequest): ResponseEntity<Any> {
+        return try {
+            eventService.saveWinner(request.eventName, request.playerId)
+            ResponseEntity.status(HttpStatus.OK).body(mapOf("status" to "success"))
+        } catch (e: IllegalArgumentException) {
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(mapOf("status" to 400, "error" to "Bad Request", "message" to e.message))
+        } catch (e: Exception) {
+            ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(mapOf("status" to 500, "error" to "Internal Server Error", "message" to e.message))
+        }
+    }
 }
+
+data class SaveWinnerRequest(
+    val eventName: String,
+    val playerId: Long
+)
