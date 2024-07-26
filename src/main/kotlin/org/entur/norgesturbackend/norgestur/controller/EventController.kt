@@ -60,9 +60,13 @@ class EventController(private val eventService: EventService) {
     }
 
     @PostMapping("/new-event")
-    fun createOrUpdateEvent(@RequestBody event: Event): ResponseEntity<Event> {
-        val savedEvent = eventService.addOrUpdateEvent(event)
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedEvent)
+    fun createOrUpdateEvent(@RequestBody event: Event): ResponseEntity<Any> {
+        return try {
+            val savedEvent = eventService.addOrUpdateEvent(event)
+            ResponseEntity(savedEvent, HttpStatus.OK)
+        } catch (e: EventService.EventAlreadyExistsException) {
+            ResponseEntity.status(409).body(mapOf("status" to 409, "error" to "Conflict", "message" to "Player with same name but different email and/or phone number already exists"))
+        }
     }
 
     @PutMapping("/event/active/{eventId}")

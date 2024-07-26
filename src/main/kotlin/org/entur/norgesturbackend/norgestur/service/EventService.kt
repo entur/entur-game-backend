@@ -36,14 +36,14 @@ class EventService(
     }
 
     @Transactional
+    @Throws(EventAlreadyExistsException::class)
     fun addOrUpdateEvent(event: Event): Event {
         eventRepository.deactivateAllEvents()
         val existingEvent = eventRepository.findEventByEventName(event.eventName)
-        return if (existingEvent != null) {
-            deleteEvent(existingEvent.eventId)
-            eventRepository.save(event)
+        if (existingEvent != null) {
+            throw EventAlreadyExistsException("Event with name ${event.eventName} already exists.")
         } else {
-            eventRepository.save(event)
+            return eventRepository.save(event)
         }
     }
 
@@ -82,5 +82,6 @@ class EventService(
         }
     }
 
+    class EventAlreadyExistsException(message: String) : RuntimeException(message)
     class MultipleActiveEventsException(message: String) : RuntimeException(message)
 }
