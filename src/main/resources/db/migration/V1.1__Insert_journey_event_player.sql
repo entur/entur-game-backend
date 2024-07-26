@@ -1,4 +1,3 @@
--- Inserting data into the PLAYER table
 INSERT INTO PLAYER (player_name, email, phone_number)
 VALUES
     ('Player1', 'player1@example.com', '10000001'),
@@ -22,7 +21,6 @@ VALUES
     ('Player19', 'player19@example.com', '10000019'),
     ('Player20', 'player20@example.com', '10000020');
 
--- Inserting data into the EVENT table
 INSERT INTO EVENT (event_name, start_location_id, end_location_id, start_time, optimal_step_number, optimal_travel_time, is_active)
 VALUES
     ('event1:easy', 'NSR:StopPlace:58366', 'NSR:StopPlace:59977', '2024-06-01 10:00:00', 2, 34020, false),
@@ -30,8 +28,6 @@ VALUES
     ('event3:hard', 'NSR:StopPlace:58366', 'NSR:StopPlace:198', '2024-06-01 12:00:00', 7, 123000, false),
     ('event4', 'NSR:StopPlace:58366', 'NSR:StopPlace:198', '2024-06-01 12:00:00', 7, 123000, true);
 
--- Inserting data into the SCORE table
--- Ensure event_id and player_id refer to existing records in EVENT and PLAYER tables
 INSERT INTO SCORE (score_value, total_step_number, total_travel_time, total_play_time, event_id, player_id)
 VALUES
     (100, 2, 34020, 100, (SELECT event_id FROM EVENT WHERE event_name = 'event1:easy'), (SELECT player_id FROM PLAYER WHERE player_name = 'Player1')),
