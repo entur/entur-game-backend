@@ -65,7 +65,7 @@ class EventController(private val eventService: EventService) {
             val savedEvent = eventService.addOrUpdateEvent(event)
             ResponseEntity(savedEvent, HttpStatus.OK)
         } catch (e: EventService.EventAlreadyExistsException) {
-            ResponseEntity.status(409).body(mapOf("status" to 409, "error" to "Conflict", "message" to "Player with same name but different email and/or phone number already exists"))
+            ResponseEntity.status(409).body(mapOf("status" to 409, "error" to "Conflict", "message" to "Event with the same name already exists"))
         }
     }
 
