@@ -14,8 +14,13 @@ spring:
         format_sql: true
 #    generate-ddl: true
   flyway:
-#    enabled: false
+    locations: classpath:db/migration
+    url: ${DATABASE_URL}
+    user: ${PGUSER}
+    password: ${PGPASSWORD}
     enabled: true
-    validate-on-migrate: true
+    placeholderReplacement: false
+    schemas: public
+    default-schema: public
   cors:
     mode: default

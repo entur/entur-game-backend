@@ -7,8 +7,10 @@ spring:
   jpa:
     show-sql: true
   flyway:
-    # TODO: remove this before deployment
     enabled: true
-   # validate-on-migrate: true
+    validate-on-migrate: true
+    url: jdbc:postgresql://localhost:5432/norgestur-db
+    user: postgres
+    password: entur123
     clean-on-validation-error: true
     clean-disabled: false
