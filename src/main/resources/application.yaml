@@ -15,12 +15,5 @@ spring:
 #    generate-ddl: true
   flyway:
     locations: classpath:db/migration
-    url: ${DATABASE_URL}
-    user: ${PGUSER}
-    password: ${PGPASSWORD}
-    enabled: true
-    placeholderReplacement: false
-    schemas: public
-    default-schema: public
   cors:
     mode: default
