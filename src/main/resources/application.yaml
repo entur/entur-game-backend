@@ -17,3 +17,5 @@ spring:
 #    enabled: false
     enabled: true
     validate-on-migrate: true
+  cors:
+    mode: default
