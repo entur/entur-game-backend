@@ -1,12 +1,24 @@
 # Norgestur-backend
-This backend was developed from scratch during a hackathon by [@Daniel](https://github.com/Daniel-Jansson), [@Kenneth](https://github.com/kennetng) and [@Artur](https://github.com/apkrauze).
+Welcome to the Norgestur project! This is the 3rd version of the game, developed by summer workers in 2024. This game aims to provide an engaging and fun way to explore routes in Norway. Below you will find information on how to set up, run, and contribute to the project. This is the backend part of our project and works together with [entur-game-frontend](https://github.com/entur/entur-game-frontend).
 
-This project will receive a players game stats from [entur-game-frontend](https://github.com/entur/entur-game-frontend).
-To run this project you need do have docker and run the script in the script tag.
+## Developers
+### 2024 Summer Team
+- [Magnus](https://github.com/Magnus-Farstad)
+- [Marianne](https://github.com/maribsta)
+- [Oscar](https://github.com/oscarahalvorsen)
+- [Selma](https://github.com/selmagudmundsen)
+- [Tomas](https://github.com/tomaswedege)
+
+### Previous Developers
+- [Artur](https://github.com/apkrauze)
+- [Kenneth](https://github.com/kennetng)
+- [Daniel](https://github.com/Daniel-Jansson)
+
 
 ## Application scripts
 
 ### Docker
+To run this project you need do have docker and run the script in the script tag.
 Note that if changes are made to the script below for either database name or postgres_password you also need to enter application-local and change the values for the respective fields.
 ```
 docker run --name norgestur-db -p 5432:5432 -e POSTGRES_DB=norgestur-db -e POSTGRES_PASSWORD=entur123 -d postgres:15.2-alpine
