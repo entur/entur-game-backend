@@ -1,5 +1,5 @@
 # Norgestur-backend
-Welcome to the Norgestur project! This is the 3rd version of the game, developed by summer workers in 2024. This game aims to provide an engaging and fun way to explore routes in Norway. Below you will find information on how to set up, run, and contribute to the project. This is the backend part of our project and works together with [entur-game-frontend](https://github.com/entur/entur-game-frontend).
+Welcome to the Norgestur project! This is the 3rd version of the game, developed by summer interns in 2024. This game aims to provide an engaging and fun way to explore public transportation in Norway. Below you will find information on how to set up, run, and contribute to the project. This is the backend of our project and works together with [entur-game-frontend](https://github.com/entur/entur-game-frontend).
 
 ## Developers
 ### 2024 Summer Team
