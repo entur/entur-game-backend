@@ -7,7 +7,7 @@ module "init" {
 
 # https://github.com/entur/terraform-google-sql-db/tree/master/modules/postgresql#inputs
 module "postgres" {
-  source           = "github.com/entur/terraform-google-sql-db//modules/postgresql?ref=v1.7.1"
+  source           = "github.com/entur/terraform-google-sql-db//modules/postgresql?ref=v1.7.3"
   init             = module.init
   generation       = var.generation
   database_version = "POSTGRES_14"
