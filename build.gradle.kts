@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "3.1.4"
+	id("org.springframework.boot") version "3.3.5"
 	id("io.spring.dependency-management") version "1.1.3"
 	kotlin("jvm") version "1.9.10"
 	kotlin("plugin.jpa") version "1.9.10"
@@ -21,8 +21,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-configuration-processor")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springframework:spring-websocket:6.0.12")
-	implementation("org.springframework:spring-messaging:6.0.12")
+	implementation("org.springframework:spring-websocket:6.1.14")
+	implementation("org.springframework:spring-messaging:6.1.14")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.flywaydb:flyway-core")
