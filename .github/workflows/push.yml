@@ -24,8 +24,8 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew --no-daemon clean build -x test
         env:
-          ARTIFACTORY_USER: ${{ secrets.ARTIFACTORY_AUTH_USER }}
-          ARTIFACTORY_APIKEY: ${{ secrets.ARTIFACTORY_AUTH_TOKEN }}
+          ARTIFACTORY_AUTH_USER: ${{ secrets.ARTIFACTORY_AUTH_USER }}
+          ARTIFACTORY_AUTH_TOKEN: ${{ secrets.ARTIFACTORY_AUTH_TOKEN }}
       - name: Archive Build Artifacts
         if: success()
         uses: actions/upload-artifact@v4
