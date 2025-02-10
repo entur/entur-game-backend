@@ -1,6 +1,6 @@
 FROM gcr.io/distroless/java17-debian12:nonroot
 
-LABEL org.opencontainers.image.authors="teampartner@entur.org"
+LABEL org.opencontainers.image.authors="Team Portal <TeamPortal@entur.org>"
 EXPOSE 9010
 
 COPY build/libs/entur-game-backend*.jar /app/entur-game-backend.jar
