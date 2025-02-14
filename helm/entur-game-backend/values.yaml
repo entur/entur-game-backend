@@ -1,7 +1,7 @@
 common:
   app: entur-game-backend
   shortname: enturbckend
-  team: partner
+  team: portal
   ingress:
     enabled: true
     trafficType: public
