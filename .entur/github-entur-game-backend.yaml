@@ -1,0 +1,9 @@
+apiVersion: orchestrator.entur.io/github/v1
+kind: GitHubManifest
+metadata:
+  id: entur-game-backend
+  trigger: 1755864047
+spec:
+  environments:
+  - tst
+  - prd
