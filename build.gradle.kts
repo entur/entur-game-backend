@@ -1,11 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "3.5.11"
+	id("org.springframework.boot") version "4.0.3"
 	id("io.spring.dependency-management") version "1.1.7"
-	kotlin("jvm") version "1.9.25"
-	kotlin("plugin.jpa") version "1.9.25"
-	kotlin("plugin.spring") version "1.9.25"
+	kotlin("jvm") version "2.3.10"
+	kotlin("plugin.jpa") version "2.3.10"
+	kotlin("plugin.spring") version "2.3.10"
 }
 
 group = "org.entur.norgestur-backend"
@@ -21,8 +21,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-configuration-processor")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springframework:spring-websocket:6.2.16")
-	implementation("org.springframework:spring-messaging:6.2.16")
+	implementation("org.springframework:spring-websocket:7.0.5")
+	implementation("org.springframework:spring-messaging:7.0.5")
 
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.flywaydb:flyway-core")
